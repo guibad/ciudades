@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
+import { useHistory } from "react-router-dom";
 import './Navbar.css';
 import ciudades from '../../assets/img/cities.png';
 
 export const Navbar = () => {
-    const [activeLink, setActiveLink] = useState(null);
+    const [activeLink, setActiveLink] = useState("linkBuscar");
+    const history = useHistory();
 
     const handleClick = (divId) => {
+        if (divId === "linkBuscar") {
+            history.push('/');
+        } else {
+            history.push('/historial');
+        }
         setActiveLink(divId);
     };
 
@@ -17,12 +24,12 @@ export const Navbar = () => {
             <h2 className='titulo'>Ciudades</h2>
             <div className="links-container">
                 <div className={activeLink === "linkBuscar" ? "link_activo" : "link"} onClick={() => handleClick("linkBuscar")}>
-                    <h4>Buscar</h4>
+                    <h5>Buscar</h5>
                 </div>
                 <div className={activeLink === "linkHistorial" ? "link_activo" : "link"} onClick={() => handleClick("linkHistorial")}>
-                    <h4>Historial</h4>
+                    <h5>Historial</h5>
                 </div>
             </div>
         </nav>
-    )
+    );
 }

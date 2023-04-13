@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import './Navbar.css';
 import ciudades from '../../assets/img/cities.png';
 
 export const Navbar = () => {
-    const [activeLink, setActiveLink] = useState("linkBuscar");
+    const [activeLink, setActiveLink] = useState(null);
     const history = useHistory();
 
     const handleClick = (divId) => {
@@ -15,6 +15,13 @@ export const Navbar = () => {
         }
         setActiveLink(divId);
     };
+
+    useEffect(() => {
+        const pathname = window.location.pathname
+        if (pathname === "/") setActiveLink("linkBuscar");
+        else if (pathname === "/historial") setActiveLink("linkHistorial");
+        else setActiveLink(null);
+    }, [])
 
     return (
         <nav className="navbar justify-content-between">

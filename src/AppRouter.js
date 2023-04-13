@@ -8,12 +8,12 @@ import { Navbar } from "./components/Navbar/Navbar";
 export const AppRouter = () => {
 
     return (
-        <Router>
+        <Router forceRefresh={true}>
             <Navbar />
             <Switch>
                 <Route exact path="/" component={BuscarPage} />
-                <Route exact path="/historial" component={HistorialPage} />
-                <Route path="/" component={NotFoundPage} />
+                <Route path="/historial" component={HistorialPage} />
+                <Route component={NotFoundPage} />
             </Switch>
         </Router>
     );

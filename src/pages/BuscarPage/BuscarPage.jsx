@@ -1,7 +1,12 @@
-import React from 'react'
+import React from 'react';
+import { Buscador } from '../../components/Buscador/Buscador';
+import './BuscarPage.css';
 
 export const BuscarPage = () => {
   return (
-    <h2>BuscarPage</h2>
+    <div className='container'>
+      <Buscador />
+
+    </div>
   )
 }

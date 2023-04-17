@@ -1,0 +1,55 @@
+.pestanya-container {
+    width: 100%;
+    padding: 20px;
+}
+
+.pestanya {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    background-color: white;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+}
+
+.cabecera {
+    position: relative;
+    width: 100%;
+    height: 30px;
+    background-color: #6a00ff;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.titulo-pestanya {
+    margin-left: 15px;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.boton-minimizar {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+    border: none;
+    border-radius: 50%;
+    background-color: white;
+    color: #6a00ff;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+}
+
+.contenido {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 30px);
+    padding: 10px;
+    overflow: auto;
+}

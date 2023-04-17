@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { BuscarPage } from "./pages/BuscarPage/BuscarPage";
 import { HistorialPage } from "./pages/HistorialPage/HistorialPage";
 import { NotFoundPage } from "./pages/NotFoundPage/NotFoundPage";
@@ -8,13 +8,13 @@ import { Navbar } from "./components/Navbar/Navbar";
 export const AppRouter = () => {
 
     return (
-        <Router forceRefresh={true}>
+        <Router>
             <Navbar />
-            <Switch>
-                <Route exact path="/" component={BuscarPage} />
-                <Route path="/historial" component={HistorialPage} />
-                <Route component={NotFoundPage} />
-            </Switch>
+            <Routes>
+                <Route exact path="/" element={<BuscarPage />} />
+                <Route path="/historial" element={<HistorialPage />} />
+                <Route component={<NotFoundPage />} />
+            </Routes>
         </Router>
     );
 };

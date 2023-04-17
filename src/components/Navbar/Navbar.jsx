@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import './Navbar.css';
 import ciudades from '../../assets/img/cities.png';
 
 export const Navbar = () => {
     const [activeLink, setActiveLink] = useState(null);
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const handleClick = (divId) => {
         if (divId === "linkBuscar") {
-            history.push('/');
+            navigate('/');
         } else {
-            history.push('/historial');
+            navigate('/historial');
         }
         setActiveLink(divId);
     };

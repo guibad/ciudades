@@ -1,15 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react';
+import './Buscador.css';
 
-export const Buscador = () => {
+export const Buscador = (props) => {
+    const [busqueda, setBusqueda] = useState('');
+    const [mensajeError, setMensajeError] = useState('');
+
+    const handleInputChange = event => {
+        setBusqueda(event.target.value);
+    };
+
+    const handleSearch = async () => {
+        if (busqueda === '') setMensajeError('Se debe introducir un código postal.');
+        else if (busqueda.length !== 5) setMensajeError('El código postal debe tener 5 dígitos.');
+        else if (isNaN(busqueda)) {
+            setMensajeError('El codigo postal debe ser númerico.');
+        } else {
+            const response = await fetch(`https://api.zippopotam.us/es/${busqueda}`);
+            const data = await response.json();
+            console.log('data :>> ', data);
+            setMensajeError('');
+        }
+    };
+
     return (
-        <div>
-            <br></br>
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Introduce código postal..." aria-label="Recipient's username" aria-describedby="basic-addon2" />
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button">Button</button>
-                </div>
+        <div className='buscador-container'>
+            <div className="buscador">
+                <input type="text" className="input-buscador form-control" value={busqueda} onChange={handleInputChange} placeholder="Introduce código postal..." />
+                <button className="btn" type="button" onClick={handleSearch}>Buscar</button>
             </div>
+            <h6 className='mensaje-error'>{mensajeError}</h6>
         </div>
     )
 }

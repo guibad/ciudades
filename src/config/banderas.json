@@ -1,0 +1,78 @@
+{
+    "AR": {
+        "src": "/assets/img/flags/bara.gif",
+        "alt": "Bandera Aragon"
+    },
+    "AN": {
+        "src": "/assets/img/flags/band.gif",
+        "alt": "Bandera Andalucia"
+    },
+    "O": {
+        "src": "/assets/img/flags/bast.gif",
+        "alt": "Bandera Asturias"
+    },
+    "IB": {
+        "src": "/assets/img/flags/bbal.gif",
+        "alt": "Bandera Baleares"
+    },
+    "CN": {
+        "src": "/assets/img/flags/bcnr-300x200.png",
+        "alt": "Bandera Canarias"
+    },
+    "S": {
+        "src": "/assets/img/flags/bcnt.gif",
+        "alt": "Bandera Cantabria"
+    },
+    "CL": {
+        "src": "/assets/img/flags/bcyl.gif",
+        "alt": "Bandera Castilla y León"
+    },
+    "CM": {
+        "src": "/assets/img/flags/bclm2.gif",
+        "alt": "Bandera Castilla la Mancha"
+    },
+    "CT": {
+        "src": "/assets/img/flags/bcat.gif",
+        "alt": "Bandera Catalunya"
+    },
+    "VC": {
+        "src": "/assets/img/flags/bval.gif",
+        "alt": "Bandera Comunitat Valenciana"
+    },
+    "EX": {
+        "src": "/assets/img/flags/bext.gif",
+        "alt": "Bandera Extremadura"
+    },
+    "GA": {
+        "src": "/assets/img/flags/bgal.gif",
+        "alt": "Bandera Galicia"
+    },
+    "M": {
+        "src": "/assets/img/flags/bmad.gif",
+        "alt": "Bandera Madrid"
+    },
+    "MU": {
+        "src": "/assets/img/flags/bmur.gif",
+        "alt": "Bandera Murcia"
+    },
+    "NA": {
+        "src": "/assets/img/flags/bnav.gif",
+        "alt": "Bandera Navarra"
+    },
+    "PV": {
+        "src": "/assets/img/flags/beus.gif",
+        "alt": "Bandera País Vasco"
+    },
+    "LO": {
+        "src": "/assets/img/flags/briojasin.gif",
+        "alt": "Bandera La Rioja"
+    },
+    "CE": {
+        "src": "/assets/img/flags/bceu.gif",
+        "alt": "Bandera Ceuta"
+    },
+    "ML": {
+        "src": "/assets/img/flags/bmel.gif",
+        "alt": "Bandera Ceuta"
+    }
+}

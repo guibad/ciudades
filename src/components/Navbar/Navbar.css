@@ -10,7 +10,7 @@
 }
 
 .navbar-brand {
-    margin-top: -50px;
+    margin-top: -10px;
 }
 
 .links-container {
@@ -43,5 +43,5 @@
 }
 
 .link h4 {
-    margin:0px;
+    margin: 0px;
 }

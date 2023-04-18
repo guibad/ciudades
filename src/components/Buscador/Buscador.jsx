@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Buscador.css';
 
 export const Buscador = (props) => {
     const [busqueda, setBusqueda] = useState('');
     const [mensajeError, setMensajeError] = useState('');
+    const navigate = useNavigate();
 
     const handleInputChange = event => {
         setBusqueda(event.target.value);
@@ -15,9 +17,8 @@ export const Buscador = (props) => {
         else if (isNaN(busqueda)) {
             setMensajeError('El codigo postal debe ser númerico.');
         } else {
-            const response = await fetch(`https://api.zippopotam.us/es/${busqueda}`);
-            const data = await response.json();
-            console.log('data :>> ', data);
+            let url = "/buscar/" + busqueda;
+            navigate(url);
             setMensajeError('');
         }
     };

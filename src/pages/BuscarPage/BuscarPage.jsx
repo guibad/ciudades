@@ -5,12 +5,12 @@ import { InfoClima } from '../../components/InfoClima/InfoClima';
 import { InfoGeo } from '../../components/InfoGeo/InfoGeo';
 import { InfoPolitica } from '../../components/InfoPolitica/InfoPolitica';
 import { Recuadro } from '../../components/Recuadro/Recuadro';
-import { useFetchServices } from '../../services/useFetchServices';
+import { useFetchPolitica } from '../../services/useFetchPolitica';
 import './BuscarPage.css';
 
 export const BuscarPage = () => {
   const { cp } = useParams();
-  const { infoClima, loading, error } = useFetchServices(cp);
+  const { loading, error } = useFetchPolitica(cp);
 
   return (
     <div className='container_buscar'>
@@ -27,7 +27,7 @@ export const BuscarPage = () => {
                 <InfoPolitica />
               </Recuadro>
               <Recuadro texto="Información climática" >
-                <InfoClima datos={infoClima} />
+                <InfoClima />
               </Recuadro>
               <Recuadro texto="Información geográfica">
                 <InfoGeo />

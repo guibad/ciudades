@@ -5,16 +5,13 @@ import { InfoPoliticaContext } from '../../context/InfoPoliticaContext';
 
 export const InfoGeo = (props) => {
     const { infoPolitica } = useContext(InfoPoliticaContext);
-    console.log('infoPoliticaCONTEXT :>> ', infoPolitica);
     let abbreviation = infoPolitica.places[0]["state abbreviation"];
-    console.log('abbreviation :>> ', abbreviation);
     let latitud = infoPolitica.places[0].latitude;
     let longitud = infoPolitica.places[0].longitude;
 
     const onlickHandler = () => {
         window.open(`https://www.google.com/maps/@${latitud},${longitud},14z`, '_blank');
     }
-
 
     return (
         <div className='geo-container'>

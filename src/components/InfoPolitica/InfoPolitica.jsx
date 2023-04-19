@@ -3,9 +3,8 @@ import './InfoPolitica.css';
 import banderas from '../../config/banderas.json';
 import { InfoPoliticaContext } from '../../context/InfoPoliticaContext';
 
-export const InfoPolitica = (props) => {
+export const InfoPolitica = () => {
     const { infoPolitica } = useContext(InfoPoliticaContext);
-    console.log('infoPoliticaCONTEXT :>> ', infoPolitica);
     let abbreviation = infoPolitica.places[0]["state abbreviation"];
 
     return (

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Buscador.css';
 
-export const Buscador = (props) => {
+export const Buscador = () => {
     const [busqueda, setBusqueda] = useState('');
     const [mensajeError, setMensajeError] = useState('');
     const navigate = useNavigate();
@@ -10,6 +10,12 @@ export const Buscador = (props) => {
     const handleInputChange = event => {
         setBusqueda(event.target.value);
     };
+
+    function handleInputKeyDown(event) {
+        if (event.key === 'Enter') {
+            handleSearch();
+        }
+    }
 
     const handleSearch = async () => {
         if (busqueda === '') setMensajeError('Se debe introducir un código postal.');
@@ -25,8 +31,8 @@ export const Buscador = (props) => {
 
     return (
         <div className='buscador-container'>
-            <div className="buscador">
-                <input type="text" className="input-buscador form-control" value={busqueda} onChange={handleInputChange} placeholder="Introduce código postal..." />
+            <div className='buscador'>
+                <input type="text" className="input-buscador form-control" value={busqueda} onChange={handleInputChange} placeholder="Introduce código postal..." onKeyDown={handleInputKeyDown} />
                 <button className="btn" type="button" onClick={handleSearch}>Buscar</button>
             </div>
             <h6 className='mensaje-error'>{mensajeError}</h6>

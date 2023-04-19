@@ -28,6 +28,7 @@
     padding: 30px 30px 25.3px 30px;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
+    cursor: pointer;
 }
 
 .link_activo {
@@ -40,6 +41,7 @@
     padding: 30px 30px 25.3px 30px;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
+    cursor: pointer;
 }
 
 .link h4 {

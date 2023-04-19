@@ -18,7 +18,7 @@ export const Navbar = () => {
     useEffect(() => {
         const pathname = window.location.pathname
         if (pathname === "/") setActiveLink("linkBuscar");
-        if (pathname === "/buscar") setActiveLink("linkBuscar");
+        else if (pathname === "/buscar/") setActiveLink("linkBuscar");
         else if (pathname === "/historial") setActiveLink("linkHistorial");
     }, [])
 

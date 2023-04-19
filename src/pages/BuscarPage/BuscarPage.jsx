@@ -10,26 +10,32 @@ import './BuscarPage.css';
 
 export const BuscarPage = () => {
   const { cp } = useParams();
-  const { infoPolitica, infoClima, loading } = useFetchServices(cp);
-  console.log('infoPolitica :>> ', infoPolitica);
-  console.log('infoClima :>> ', infoClima);
+  const { infoClima, loading, error } = useFetchServices(cp);
 
   return (
-    loading ? (
-      <div>Cargando...</div>
-    ) : (
-      <div className='container_buscar'>
-        <Buscador />
-        <Recuadro texto="Información política" >
-          <InfoPolitica datos={infoPolitica} />
-        </Recuadro>
-        <Recuadro texto="Información climática" >
-          <InfoClima datos={infoClima} />
-        </Recuadro>
-        <Recuadro texto="Información geográfica">
-          <InfoGeo datos={infoPolitica} />
-        </Recuadro>
-      </div>
-    )
+    <div className='container_buscar'>
+      <Buscador />
+      {
+        loading ? (
+          <div>Cargando...</div>
+        ) : (
+          error ? (
+            <div className='mensaje-error-resultados'>No se obtuvieron resultados.</div>
+          ) : (
+            <>
+              <Recuadro texto="Información política" >
+                <InfoPolitica />
+              </Recuadro>
+              <Recuadro texto="Información climática" >
+                <InfoClima datos={infoClima} />
+              </Recuadro>
+              <Recuadro texto="Información geográfica">
+                <InfoGeo />
+              </Recuadro>
+            </>
+          )
+        )
+      }
+    </div>
   )
 }

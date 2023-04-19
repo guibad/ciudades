@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { InfoPoliticaContext } from '../context/InfoPoliticaContext';
 
 export const useFetchServices = (cp) => {
-    const [infoPolitica, setInfoPolitica] = useState([])
+    const { infoPolitica, setInfoPolitica } = useContext(InfoPoliticaContext);
     const [infoClima, setInfoClima] = useState([])
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
 
     useEffect(() => {
         async function fetchData1() {
@@ -18,12 +20,16 @@ export const useFetchServices = (cp) => {
                     const res2 = await req2.json();
                     setInfoClima(res2);
                     setLoading(false);
+                    setError(false);
                 } catch (error) {
                     console.log('error2 :>> ', error);
+                    setLoading(false);
+                    setError(true)
                 }
             } catch (error) {
                 console.log('error1 :>> ', error);
-                setLoading(true)
+                setLoading(false)
+                setError(true)
             }
         }
 
@@ -31,5 +37,5 @@ export const useFetchServices = (cp) => {
         fetchData1();
     }, [cp])
 
-    return { infoPolitica, infoClima, loading }
+    return { infoPolitica, infoClima, loading, error }
 }

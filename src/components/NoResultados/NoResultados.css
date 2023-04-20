@@ -1,0 +1,13 @@
+.container-no-results {
+    height: 50vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 25px;
+}
+
+.container-no-results img {
+    width: 150px;
+}

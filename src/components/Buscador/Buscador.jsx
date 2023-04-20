@@ -33,9 +33,7 @@ export const Buscador = (props) => {
         <div className='buscador-container'>
             <div className='buscador'>
                 <input type="text" className="input-buscador form-control" value={busqueda} onChange={handleInputChange} placeholder="Introduce código postal..." onKeyDown={handleInputKeyDown} />
-
-                <button className="btn" type="button" onClick={handleSearch} style={{ opacity: props.loading ? "0" : "100" }}>Buscar</button>
-
+                <button className="btn" type="button" onClick={handleSearch} style={{ opacity: props.loading ? "0" : "100", pointerEvents: props.loading ? "none" : "all" }}>Buscar</button>
             </div>
             <h6 className='mensaje-error'>{mensajeError}</h6>
         </div>

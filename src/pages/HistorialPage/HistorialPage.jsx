@@ -34,7 +34,7 @@ export const HistorialPage = () => {
           {
             historial.length !== 0 ? (
               <button className='btn' onClick={borrarHistorial}>Borrar historial</button>
-            ) : <p>No hay búsquedas recientes.</p>
+            ) : <h4>No hay búsquedas recientes</h4>
           }
         </div>
 

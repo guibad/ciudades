@@ -1,7 +1,8 @@
 .container_buscar {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background-color: rgb(255, 255, 255);
+    margin-bottom: 20px;
 }
 
 .mensaje-error-resultados {

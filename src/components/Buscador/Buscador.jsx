@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Buscador.css';
 
-export const Buscador = () => {
+export const Buscador = (props) => {
     const [busqueda, setBusqueda] = useState('');
     const [mensajeError, setMensajeError] = useState('');
     const navigate = useNavigate();
@@ -33,7 +33,9 @@ export const Buscador = () => {
         <div className='buscador-container'>
             <div className='buscador'>
                 <input type="text" className="input-buscador form-control" value={busqueda} onChange={handleInputChange} placeholder="Introduce código postal..." onKeyDown={handleInputKeyDown} />
-                <button className="btn" type="button" onClick={handleSearch}>Buscar</button>
+
+                <button className="btn" type="button" onClick={handleSearch} style={{ opacity: props.loading ? "0" : "100" }}>Buscar</button>
+
             </div>
             <h6 className='mensaje-error'>{mensajeError}</h6>
         </div>

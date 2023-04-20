@@ -1,24 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { InfoHistorialContext } from '../../context/InfoHistorialContext';
 import './HistorialPage.css';
 
 export const HistorialPage = () => {
-  const [historial, setHistorial] = useState([])
+  const { historial, setHistorial } = useContext(InfoHistorialContext);
   const navigate = useNavigate();
 
   const borrarHistorial = () => {
-    localStorage.setItem('historial', JSON.stringify([]));
-    refrescarHistorial();
+    setHistorial([]);
   }
-
-  const refrescarHistorial = () => {
-    setHistorial(JSON.parse(localStorage.getItem('historial')) || []);
-  }
-
-  useEffect(() => {
-    refrescarHistorial();
-  }, [])
-
 
   return (
     <>

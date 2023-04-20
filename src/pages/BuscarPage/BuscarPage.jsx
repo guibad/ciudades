@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Buscador } from '../../components/Buscador/Buscador';
+import { Cargando } from '../../components/Cargando/Cargando';
 import { InfoClima } from '../../components/InfoClima/InfoClima';
 import { InfoGeo } from '../../components/InfoGeo/InfoGeo';
 import { InfoPolitica } from '../../components/InfoPolitica/InfoPolitica';
@@ -14,10 +15,10 @@ export const BuscarPage = () => {
 
   return (
     <div className='container_buscar'>
-      <Buscador />
+      <Buscador loading={loading} />
       {
         loading ? (
-          <div>Cargando...</div>
+          <Cargando />
         ) : (
           error ? (
             <div className='mensaje-error-resultados'>No se obtuvieron resultados.</div>

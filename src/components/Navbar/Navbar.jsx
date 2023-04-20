@@ -6,6 +6,13 @@ export const Navbar = () => {
     const [activeLink, setActiveLink] = useState(null);
     const navigate = useNavigate();
 
+    const refrescarLinkActivo = () => {
+        const pathname = window.location.pathname
+        if (pathname === "/") setActiveLink("linkBuscar");
+        else if (pathname.includes("/buscar/")) setActiveLink("linkBuscar");
+        else if (pathname === "/historial") setActiveLink("linkHistorial");
+    }
+
     const handleClick = (divId) => {
         if (divId === "linkBuscar") {
             navigate('/');
@@ -13,13 +20,11 @@ export const Navbar = () => {
             navigate('/historial');
         }
         setActiveLink(divId);
+        refrescarLinkActivo();
     };
 
     useEffect(() => {
-        const pathname = window.location.pathname
-        if (pathname === "/") setActiveLink("linkBuscar");
-        else if (pathname === "/buscar/") setActiveLink("linkBuscar");
-        else if (pathname === "/historial") setActiveLink("linkHistorial");
+        refrescarLinkActivo();
     }, [])
 
     return (

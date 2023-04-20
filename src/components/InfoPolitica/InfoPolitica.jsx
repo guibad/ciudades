@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import './InfoPolitica.css';
 import banderas from '../../config/banderas.json';
-import { InfoPoliticaContext } from '../../context/InfoPoliticaContext';
+import { InfoHistorialContext } from '../../context/InfoHistorialContext';
 
 export const InfoPolitica = () => {
-    const { infoPolitica } = useContext(InfoPoliticaContext);
+    const { infoPolitica } = useContext(InfoHistorialContext);
     let abbreviation = infoPolitica.places[0]["state abbreviation"];
 
     return (

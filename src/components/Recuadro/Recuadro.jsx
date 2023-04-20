@@ -10,10 +10,10 @@ export const Recuadro = (props) => {
 
     return (
         <div className="pestanya-container">
-            <div className="pestanya" style={{ height: minimizada ? '30px' : '200px' }}>
-                <div className="cabecera" onClick={toggleMinimizada}>
+            <div className="pestanya" style={{ height: minimizada ? '30px' : (props.altura || "200px") }}>
+                <div className="cabecera">
                     <span className="titulo-pestanya">{props.texto}</span>
-                    <button className="boton-minimizar">-</button>
+                    <button className="boton-minimizar" onClick={toggleMinimizada}>-</button>
                 </div>
                 {!minimizada && (
                     <div className="contenido">

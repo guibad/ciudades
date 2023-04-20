@@ -28,7 +28,7 @@ export const BuscarPage = () => {
               <Recuadro texto="Información política" >
                 <InfoPolitica />
               </Recuadro>
-              <Recuadro texto="Información climática" >
+              <Recuadro texto="Información climática" altura="350px">
                 <InfoClima />
               </Recuadro>
               <Recuadro texto="Información geográfica">

@@ -12,6 +12,10 @@ export const useFetchPolitica = (cp) => {
                 setLoading(true);
                 const req1 = await fetch(`https://api.zippopotam.us/es/${cp}`);
                 const res1 = await req1.json();
+                if (cp.slice(0, 2) === "35") {
+                    res1.places[0].latitude = 28.1;
+                    res1.places[0].longitude = -15.5;
+                }
                 setInfoPolitica(res1)
                 if (Object.keys(res1).length === 0) setError(true);
                 else {

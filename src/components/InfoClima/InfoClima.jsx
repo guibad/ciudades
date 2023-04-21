@@ -9,28 +9,30 @@ export const InfoClima = () => {
     let longitud = infoPolitica.places[0].longitude;
     let { infoClima, loading } = useFetchClima(latitud, longitud);
 
+    function encontrarMaximo(array) {
+        return Math.max(...array);
+    }
+
     if (!loading) {
         let temperaturas = infoClima.hourly.temperature_2m;
         let horas = infoClima.hourly.time;
-        console.log('temperaturas.length :>> ', temperaturas.length);
-        console.log('horas.length :>> ', horas);
+        const maximaTemperatura = parseInt(encontrarMaximo(temperaturas));
 
         return (
             <div className='clima-container'>
                 <div className="chart">
                     <div className="y-axis">
-                        <span>100</span>
-                        <span>75</span>
-                        <span>50</span>
-                        <span>25</span>
-                        <span className="axis-label">Medida</span>
+                        <span>{maximaTemperatura + 2} ºC </span>
+                        <span>{parseInt(maximaTemperatura / 2)} ºC</span>
+                        <span>0 ºC</span>
                     </div>
                     <div className="bars">
                         {
                             horas.map((item, index) => {
+                                const hora = item.substring(item.indexOf("T") + 1);
                                 return (
-                                    <div className="bar" style={{ height: temperaturas[index] + "%" }} key={index}>
-                                        <span>{temperaturas[index]}</span>
+                                    <div className="bar" style={{ height: temperaturas[index] * 100 / (maximaTemperatura + 2) + "%" }} key={index}>
+                                        <span>{hora} ({parseInt(temperaturas[index])} ºC)</span>
                                     </div>
                                 )
                             })

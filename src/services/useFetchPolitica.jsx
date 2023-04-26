@@ -12,7 +12,7 @@ export const useFetchPolitica = (cp) => {
                 setLoading(true);
                 const req1 = await fetch(`https://api.zippopotam.us/es/${cp}`);
                 const res1 = await req1.json();
-                if (cp.slice(0, 2) === "35") {
+                if (cp.slice(0, 2) === "35") {  // Sin esta linea no se puede hacer fetch a los CP de Canarias porque la API no devuelve la latitud y longitud correcta
                     res1.places[0].latitude = 28.1;
                     res1.places[0].longitude = -15.5;
                 }

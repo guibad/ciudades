@@ -19,7 +19,7 @@ export const AppRouter = () => {
                     <Route exact path="/" element={<InicioPage />} />
                     <Route exact path="/buscar/:cp" element={<BuscarPage />} />
                     <Route path="/historial" element={<HistorialPage />} />
-                    <Route component={<NotFoundPage />} />
+                    <Route path="*" element={<NotFoundPage />} />
                 </Routes>
             </InfoHistorialContext.Provider>
         </Router>

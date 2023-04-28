@@ -1,0 +1,20 @@
+.boton {
+    background-color: #6a00ff;
+    color: white;
+    font-weight: 600;
+    border-radius: 18px;
+    border: 0px;
+    transition: 0.3s;
+}
+
+.boton:hover {
+    background-color: #4c00b6;
+    transition: 0.3s;
+    color: rgb(232, 232, 232);
+}
+
+.boton:active {
+    background-color: #370084;
+    transition: 0.3s;
+    color: rgb(203, 203, 203);
+}

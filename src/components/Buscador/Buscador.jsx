@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Boton } from '../Boton/Boton';
 import './Buscador.css';
 
 export const Buscador = (props) => {
@@ -33,7 +34,7 @@ export const Buscador = (props) => {
         <div className='buscador-container'>
             <div className='buscador'>
                 <input type="text" className="input-buscador form-control" value={busqueda} onChange={handleInputChange} placeholder="Introduce código postal..." onKeyDown={handleInputKeyDown} />
-                <button className="btn" type="button" onClick={handleSearch} style={{ opacity: props.loading ? "0" : "100", pointerEvents: props.loading ? "none" : "all" }}>Buscar</button>
+                <Boton style={{ opacity: props.loading ? "0" : "100", pointerEvents: props.loading ? "none" : "all" }} onClick={handleSearch} texto="Buscar" />
             </div>
             <h6 className='mensaje-error'>{mensajeError}</h6>
         </div>

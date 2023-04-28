@@ -1,4 +1,5 @@
 import React from 'react';
+import { Boton } from '../../components/Boton/Boton';
 import './NotFoundPage.css';
 
 export const NotFoundPage = () => {
@@ -10,7 +11,9 @@ export const NotFoundPage = () => {
         <p className="lead">
           La página que buscabas no existe.
         </p>
-        <a href="/" className="btn btn-primary">Volver</a>
+        <a href="/">
+          <Boton texto="Volver" width="100px" />
+        </a>
       </div>
     </div>
   )

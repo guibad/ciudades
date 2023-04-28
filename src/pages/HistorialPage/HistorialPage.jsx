@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Boton } from '../../components/Boton/Boton';
 import { InfoHistorialContext } from '../../context/InfoHistorialContext';
 import './HistorialPage.css';
 
@@ -33,7 +34,7 @@ export const HistorialPage = () => {
         <div className='boton-container'>
           {
             historial.length !== 0 ? (
-              <button className='btn' onClick={borrarHistorial}>Borrar historial</button>
+              <Boton onClick={borrarHistorial} texto="Borrar historial" height="43px" />
             ) : <h4>No hay búsquedas recientes</h4>
           }
         </div>

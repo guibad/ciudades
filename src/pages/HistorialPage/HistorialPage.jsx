@@ -18,8 +18,8 @@ export const HistorialPage = () => {
         {
           historial.map((item, index) => {
             return (
-              <div className='busqueda-container' onClick={() => navigate(`/buscar/${item.cp}`)}>
-                <div key={index} className="busqueda">
+              <div className='busqueda-container' onClick={() => navigate(`/buscar/${item.cp}`)} key={index}>
+                <div className="busqueda">
                   <div className='codigo-postal-container'>
                     <p className='codigo-postal'>{item.cp}</p>
                   </div>

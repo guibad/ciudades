@@ -28,7 +28,7 @@ export const Navbar = () => {
     }, [])
 
     return (
-        <nav className="navbar justify-content-between">
+        <nav className="navbar">
             <a className="navbar-brand" href='/'>
                 <img src={'/assets/img/logo.png'} style={{ width: "170px" }} alt="Imagen de ciudad" />
             </a>

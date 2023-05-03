@@ -30,7 +30,7 @@ export const Navbar = () => {
     return (
         <nav className="navbar">
             <a className="navbar-brand" href='/'>
-                <img src={'/assets/img/logo.png'} style={{ width: "170px" }} alt="Imagen de ciudad" />
+                <img src={'/assets/img/logo.png'} alt="Imagen de ciudad" />
             </a>
             <h2 className='titulo'>Ciudades</h2>
             <div className="links-container">

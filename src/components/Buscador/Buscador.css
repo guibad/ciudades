@@ -1,5 +1,5 @@
 .buscador-container {
-    padding: 15px 30px 15px 30px;
+    padding: 20px 30px 0px 30px;
 }
 
 .buscador {
@@ -15,8 +15,8 @@
 }
 
 .mensaje-error {
+    margin: 5px 0px 0px 0px;
     color: red;
     font-weight: bold;
-    margin-top: 5px;
     font-size: 15px;
 }

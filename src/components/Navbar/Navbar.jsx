@@ -7,7 +7,7 @@ export const Navbar = () => {
     const navigate = useNavigate();
 
     const refrescarLinkActivo = () => {
-        const pathname = window.location.pathname
+        const pathname = window.location.pathname;
         if (pathname === "/") setActiveLink("linkBuscar");
         else if (pathname.includes("/buscar/")) setActiveLink("linkBuscar");
         else if (pathname === "/historial") setActiveLink("linkHistorial");

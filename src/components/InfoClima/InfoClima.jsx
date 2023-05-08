@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import { InfoHistorialContext } from '../../context/InfoHistorialContext';
 import { useFetchClima } from '../../services/useFetchClima';
 import './InfoClima.css';
@@ -37,15 +37,6 @@ export const InfoClima = () => {
                                 )
                             })
                         }
-                        {/* <div className="bar" style={{ height: "75%" }}>
-                            <span>Valor 2</span>
-                        </div>
-                        <div className="bar" style={{ height: "25%" }}>
-                            <span>Valor 3</span>
-                        </div>
-                        <div className="bar" style={{ height: "60%" }}>
-                            <span>Valor 4</span>
-                        </div> */}
                     </div>
                 </div>
             </div>

@@ -1,9 +1,12 @@
 import { AppRouter } from "./AppRouter";
+import { InfoHistorialProvider } from "./context/InfoHistorialContext";
 
 function App() {
     return (
         <div className="App">
-            <AppRouter />
+            <InfoHistorialProvider>
+                <AppRouter />
+            </InfoHistorialProvider>
         </div>
     );
 }

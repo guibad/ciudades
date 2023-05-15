@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Boton } from '../Boton/Boton';
 import './Buscador.css';
+import idiomas from '../../config/idiomas.json';
+import { IdiomaContext } from '../../context/IdiomaContext';
 
 export const Buscador = (props) => {
     const [busqueda, setBusqueda] = useState('');
     const [mensajeError, setMensajeError] = useState('');
     const navigate = useNavigate();
+    const { idioma } = useContext(IdiomaContext);
 
     const handleInputChange = event => {
         setBusqueda(event.target.value);
@@ -19,10 +22,10 @@ export const Buscador = (props) => {
     }
 
     const handleSearch = async () => {
-        if (busqueda === '') setMensajeError('Se debe introducir un código postal.');
-        else if (busqueda.length !== 5) setMensajeError('El código postal debe tener 5 dígitos.');
+        if (busqueda === '') setMensajeError(idiomas[idioma].Buscador.errorCPVacio);
+        else if (busqueda.length !== 5) setMensajeError(idiomas[idioma].Buscador.errorCP5Digitos);
         else if (isNaN(busqueda)) {
-            setMensajeError('El codigo postal debe ser númerico.');
+            setMensajeError(idiomas[idioma].Buscador.errorNumerico);
         } else {
             let url = "/buscar/" + busqueda;
             navigate(url);
@@ -33,8 +36,8 @@ export const Buscador = (props) => {
     return (
         <div className='buscador-container'>
             <div className='buscador'>
-                <input type="text" className="input-buscador form-control" value={busqueda} onChange={handleInputChange} placeholder="Introduce código postal..." onKeyDown={handleInputKeyDown} />
-                <Boton style={{ opacity: props.loading ? "0" : "100", pointerEvents: props.loading ? "none" : "all" }} onClick={handleSearch} texto="Buscar" />
+                <input type="text" className="input-buscador form-control" value={busqueda} onChange={handleInputChange} placeholder={idiomas[idioma].Buscador.placeholder} onKeyDown={handleInputKeyDown} />
+                <Boton style={{ opacity: props.loading ? "0" : "100", pointerEvents: props.loading ? "none" : "all" }} onClick={handleSearch} texto={idiomas[idioma].Buscador.boton} />
             </div>
             <h6 className='mensaje-error' style={{ display: mensajeError.length > 0 ? "block" : "none" }}>{mensajeError}</h6>
         </div>

@@ -2,10 +2,13 @@ import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Boton } from '../../components/Boton/Boton';
 import { InfoHistorialContext } from '../../context/InfoHistorialContext';
+import { IdiomaContext } from '../../context/IdiomaContext';
+import idiomas from '../../config/idiomas.json';
 import './HistorialPage.css';
 
 export const HistorialPage = () => {
   const { historial, setHistorial } = useContext(InfoHistorialContext);
+  const { idioma } = useContext(IdiomaContext);
   const navigate = useNavigate();
 
   const borrarHistorial = () => {
@@ -34,8 +37,8 @@ export const HistorialPage = () => {
         <div className='boton-container'>
           {
             historial.length !== 0 ? (
-              <Boton onClick={borrarHistorial} texto="Borrar historial" height="43px" />
-            ) : <h4>No hay búsquedas recientes</h4>
+              <Boton onClick={borrarHistorial} texto={idiomas[idioma].HistorialPage.boton} height="43px" />
+            ) : <h4>{idiomas[idioma].HistorialPage.texto}</h4>
           }
         </div>
 

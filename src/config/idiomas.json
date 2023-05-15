@@ -1,0 +1,128 @@
+{
+    "es": {
+        "navbar": {
+            "titulo": "Ciudades",
+            "buscar": "Buscar",
+            "historial": "Historial"
+        },
+        "Buscador": {
+            "placeholder": "Introduce un código postal...",
+            "boton": "Buscar",
+            "errorCPVacio": "Se debe introducir un código postal.",
+            "errorCP5Digitos": "El código postal debe tener 5 dígitos.",
+            "errorNumerico": "El codigo postal debe ser númerico."
+        },
+        "BuscarPage": {
+            "InfoPolitica": {
+                "titulo": "Información política",
+                "ciudad": "Ciudad",
+                "comunidad": "Comunidad"
+            },
+            "InfoClima": {
+                "titulo": "Información climática"
+            },
+            "InfoGeo": {
+                "titulo": "Información geográfica",
+                "latitud": "Latitud",
+                "longitud": "Longitud",
+                "textoMapa": "Ver mapa"
+            },
+            "NoResultados": {
+                "texto": "No se obtuvieron resultados"
+            }
+        },
+        "HistorialPage": {
+            "boton": "Borrar historial",
+            "texto": "No hay búsquedas recientes"
+        },
+        "NotFoundPage": {
+            "texto": "Página no encontrada.",
+            "subtexto": "La página que buscabas no existe.",
+            "boton": "Volver"
+        }
+    },
+    "cat": {
+        "navbar": {
+            "titulo": "Ciutats",
+            "buscar": "Cercar",
+            "historial": "Historial"
+        },
+        "Buscador": {
+            "placeholder": "Introdueix un codi postal...",
+            "boton": "Cercar",
+            "errorCPVacio": "S'ha d'introduir un codi postal.",
+            "errorCP5Digitos": "El codi postal ha de tenir 5 digits.",
+            "errorNumerico": "El codi postal ha de ser númeric."
+        },
+        "BuscarPage": {
+            "InfoPolitica": {
+                "titulo": "Informació política",
+                "ciudad": "Ciutat",
+                "comunidad": "Comunitat"
+            },
+            "InfoClima": {
+                "titulo": "Informació climàtica"
+            },
+            "InfoGeo": {
+                "titulo": "Informació geogràfica",
+                "latitud": "Latitud",
+                "longitud": "Longitud",
+                "textoMapa": "Veure mapa"
+            },
+            "NoResultados": {
+                "texto": "No s'han obtingut resultats"
+            }
+        },
+        "HistorialPage": {
+            "boton": "Esborrar historial",
+            "texto": "No hi ha cerques recents."
+        },
+        "NotFoundPage": {
+            "texto": "Pàgina no trobada.",
+            "subtexto": "La pàgina que estaves cercant no existeix.",
+            "boton": "Tornar"
+        }
+    },
+    "en": {
+        "navbar": {
+            "titulo": "Cities",
+            "buscar": "Search",
+            "historial": "History"
+        },
+        "Buscador": {
+            "placeholder": "Enter a postal code...",
+            "boton": "Search",
+            "errorCPVacio": "You must type a postal code.",
+            "errorCP5Digitos": "The postal code must have 5 digits.",
+            "errorNumerico": "The postal code must be numeric."
+        },
+        "BuscarPage": {
+            "InfoPolitica": {
+                "titulo": "Political information",
+                "ciudad": "City",
+                "comunidad": "Autonomous community"
+            },
+            "InfoClima": {
+                "titulo": "Weather information"
+            },
+            "InfoGeo": {
+                "titulo": "Geographic information",
+                "latitud": "Latitude",
+                "longitud": "Longitude",
+                "textoMapa": "Look map"
+            },
+            "NoResultados": {
+                "texto": "The search hasn't returned any results"
+            }
+        },
+        "HistorialPage": {
+            "boton": "Delete history",
+            "texto": "No recent searches"
+        },
+        "NotFoundPage": {
+            "texto": "Page not found.",
+            "subtexto": "The page you were looking for doesn't exist.",
+            "boton": "Go back"
+        }
+    }
+}

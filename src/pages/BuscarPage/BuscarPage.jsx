@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { Buscador } from '../../components/Buscador/Buscador';
 import { Cargando } from '../../components/Cargando/Cargando';
@@ -9,10 +9,13 @@ import { NoResultados } from '../../components/NoResultados/NoResultados';
 import { Recuadro } from '../../components/Recuadro/Recuadro';
 import { useFetchPolitica } from '../../services/useFetchPolitica';
 import './BuscarPage.css';
+import { IdiomaContext } from '../../context/IdiomaContext';
+import idiomas from '../../config/idiomas.json';
 
 export const BuscarPage = () => {
   const { cp } = useParams();
   const { loading, error } = useFetchPolitica(cp);
+  const { idioma } = useContext(IdiomaContext);
 
   return (
     <div className='container_buscar'>
@@ -25,13 +28,13 @@ export const BuscarPage = () => {
             <NoResultados />
           ) : (
             <>
-              <Recuadro texto="Información política" >
+              <Recuadro texto={idiomas[idioma].BuscarPage.InfoPolitica.titulo} >
                 <InfoPolitica />
               </Recuadro>
-              <Recuadro texto="Información climática" altura="365px">
+              <Recuadro texto={idiomas[idioma].BuscarPage.InfoClima.titulo} altura="365px">
                 <InfoClima />
               </Recuadro>
-              <Recuadro texto="Información geográfica">
+              <Recuadro texto={idiomas[idioma].BuscarPage.InfoGeo.titulo}>
                 <InfoGeo />
               </Recuadro>
             </>

@@ -1,0 +1,16 @@
+.SelectorIdiomaContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    column-gap: 3px;
+}
+
+.SelectorIdiomaContainer svg {
+    fill: white;
+    width: 50px;
+}
+
+.SelectorIdiomaContainer select {
+    border-radius: 15px;
+}

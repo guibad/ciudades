@@ -7,7 +7,7 @@
 .titulo {
     color: white;
     font-size: 70px;
-    margin-left: 50px;
+    margin-left: 34px;
 }
 
 .navbar-brand {
@@ -21,8 +21,9 @@
 
 .links-container {
     display: flex;
-    flex-direction: row;
-    margin-bottom: -78px;
+    flex-direction: column;
+    margin-bottom: -35px;
+    row-gap: 10px;
 }
 
 .link,
@@ -48,6 +49,11 @@
 .link_activo {
     background-color: white;
     color: black;
+}
+
+.links {
+    display: flex;
+    flex-direction: row;
 }
 
 @media (max-width: 950px) {

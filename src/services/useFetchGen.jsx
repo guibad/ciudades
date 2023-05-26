@@ -7,10 +7,18 @@ export const useFetchGen = (url) => {
 
     useEffect(() => {
         (async () => {
-            const response = await fetch(url);
-            const result = await response.json();
-            console.log('object :>> ', result);
-            setData(result)
+            try {
+                const response = await fetch(url);
+                const result = await response.json();
+                if (Object.keys(result) == 0 || result.length == 0 || result == undefined) setError(true)
+                else {
+                    setData(result)
+                    setError(false);
+                }
+            } catch (err) {
+                console.log('object :>> ', err);
+                setError(true)
+            }
         })()
 
     }, [url])

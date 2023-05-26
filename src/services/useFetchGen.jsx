@@ -7,16 +7,14 @@ export const useFetchGen = (url) => {
 
     useEffect(() => {
         (async () => {
-            setLoading(true);
             const response = await fetch(url);
             const result = await response.json();
             console.log('object :>> ', result);
             setData(result)
-            setLoading(false)
         })()
 
     }, [url])
 
 
-    return { loading, error, data }
+    return { loading, setLoading, error, setError, data }
 }

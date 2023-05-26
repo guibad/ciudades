@@ -14,14 +14,14 @@ import idiomas from '../../config/idiomas.json';
 
 export const BuscarPage = () => {
   const { cp } = useParams();
-  const { loading1, error } = useFetchPolitica(cp);
+  const { loading, error } = useFetchPolitica(cp);
   const { idioma } = useContext(IdiomaContext);
 
   return (
     <div className='container_buscar'>
-      <Buscador loading={loading1} />
+      <Buscador loading={loading} />
       {
-        loading1 ? (
+        loading ? (
           <Cargando />
         ) : (
           error ? (

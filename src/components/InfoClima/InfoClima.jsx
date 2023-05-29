@@ -1,5 +1,4 @@
-import React, { useContext } from 'react'
-import { InfoHistorialContext } from '../../context/InfoHistorialContext';
+import React from 'react';
 import { useFetchClima } from '../../services/useFetchClima';
 import './InfoClima.css';
 
@@ -7,13 +6,15 @@ export const InfoClima = (props) => {
     const { infoPolitica } = props;
     let latitud = infoPolitica.places[0].latitude;
     let longitud = infoPolitica.places[0].longitude;
-    let { infoClima, loading } = useFetchClima(latitud, longitud);
+    let { infoClima, loading1, error } = useFetchClima(latitud, longitud);
 
     function encontrarMaximo(array) {
         return Math.max(...array);
     }
 
-    if (!loading) {
+    if (error) {
+        return <div>Error recuperando datos</div>
+    } else if (!loading1) {
         let temperaturas = infoClima.hourly.temperature_2m;
         let horas = infoClima.hourly.time;
         const maximaTemperatura = parseInt(encontrarMaximo(temperaturas));

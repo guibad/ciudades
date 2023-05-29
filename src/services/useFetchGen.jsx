@@ -10,6 +10,7 @@ export const useFetchGen = (url) => {
             try {
                 const response = await fetch(url);
                 const result = await response.json();
+                console.log('result :>> ', result);
                 if (response?.ok) {
                     if (Object.keys(result) == 0 || result.length == 0 || result == undefined) setError(true)
                     else {

@@ -1,26 +1,21 @@
 import { useEffect, useState } from 'react'
+import { useFetchGen } from './useFetchGen';
 
 export const useFetchClima = (latitud, longitud) => {
     const [infoClima, setInfoClima] = useState([])
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
+    const { loading, error, data } = useFetchGen(`https://api.open-meteo.com/v1/forecast?latitude=${latitud}&longitude=${longitud}&hourly=temperature_2m`);
+    const [loading1, setLoading1] = useState(true)
 
     useEffect(() => {
-        async function fetchData() {
-            try {
-                const req2 = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitud}&longitude=${longitud}&hourly=temperature_2m`);
-                const res2 = await req2.json();
-                setInfoClima(res2);
-                setLoading(false);
-                setError(false);
-            } catch (error) {
-                console.log('error2 :>> ', error);
-                setLoading(false);
-                setError(true)
-            }
+        console.log('infoClima :>> ', data);
+        if (error) {
+            setLoading1(false)
+            return
+        } else if (data && data.hourly) {
+            setInfoClima(data);
+            setLoading1(false)
         }
-        fetchData();
-    }, [latitud, longitud])
+    }, [latitud, longitud, data, error])
 
-    return { infoClima, loading, error }
+    return { infoClima, loading1, error }
 }

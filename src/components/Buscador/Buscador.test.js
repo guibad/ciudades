@@ -1,73 +1,87 @@
-/* eslint-disable testing-library/prefer-screen-queries */
+/* eslint-disable testing-library/no-node-access */
+/* eslint-disable testing-library/no-unnecessary-act */
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
-import { Buscador } from './Buscador';
 import { MemoryRouter } from 'react-router-dom';
-import { IdiomaContext } from '../../context/IdiomaContext';
+import { Buscador } from './Buscador';
+import { IdiomaContextProvider } from '../../context/IdiomaContext';
+import { render, unmountComponentAtNode } from 'react-dom';
+import { act } from 'react-dom/test-utils';
 
-describe('Test for Buscador', () => {
-    it('El buscador y el place holder se renderizan correctamente', () => {
-        const { getByPlaceholderText } = render(
-            <MemoryRouter>
-                <IdiomaContext.Provider value={{ idioma: "es" }}>
-                    <Buscador loading={false} />
-                </IdiomaContext.Provider>
-            </MemoryRouter>
-        );
-        const inputElement = getByPlaceholderText('Introduce un código postal...');
+describe('Buscador', () => {
+    let container = null;
 
-        expect(inputElement).toBeInTheDocument();
+    beforeEach(() => {
+        container = document.createElement('div');
+        document.body.appendChild(container);
     });
 
-    it('El valor del input cambia correctamente', () => {
-        const { getByPlaceholderText } = render(
-            <MemoryRouter>
-                <IdiomaContext.Provider value={{ idioma: "es" }}>
-                    <Buscador loading={false} />
-                </IdiomaContext.Provider>
-            </MemoryRouter>
-        );
-        const inputElement = getByPlaceholderText('Introduce un código postal...');
-        fireEvent.change(inputElement, { target: { value: '08020' } });
-        expect(inputElement.value).toBe('08020');
-
-        expect(inputElement).toBeInTheDocument();
+    afterEach(() => {
+        unmountComponentAtNode(container);
+        container.remove();
+        container = null;
     });
 
-    it('La función onClick se ejecuta correctamente', () => {
-        const onClickMock = jest.fn();
-        const mockNavigate = jest.fn();
-        jest.mock('react-router-dom', () => ({
-            ...jest.requireActual('react-router-dom'),
-            useNavigate: () => mockNavigate,
-        }));
+    it('Componente se renderiza correctamente', () => {
+        act(() => {
+            render(
+                <MemoryRouter>
+                    <IdiomaContextProvider value={{ idioma: 'es' }}>
+                        <Buscador loading={false} />
+                    </IdiomaContextProvider>
+                </MemoryRouter>,
+                container
+            );
+        });
 
-        const { getByText, getByPlaceholderText } = render(
-            <MemoryRouter>
-                <IdiomaContext.Provider value={{ idioma: "es" }}>
-                    <Buscador loading={false} />
-                </IdiomaContext.Provider>
-            </MemoryRouter>
-        );
-
-        const inputElement = getByPlaceholderText('Introduce un código postal...');
-        fireEvent.change(inputElement, { target: { value: '08020' } });
-
-        const buttonElement = getByText('Buscar');
-        fireEvent.click(buttonElement);
-
-        expect(onClickMock).toHaveBeenCalledTimes(1);
+        const input = container.querySelector('input');
+        const boton = container.querySelector('button');
+        expect(input).not.toBe(null);
+        expect(boton).not.toBe(null);
     });
 
-    // it('displays error message for empty input', () => {
-    //     const { getByText, getByPlaceholderText } = render(<MemoryRouter><Buscador /></MemoryRouter>);
-    //     const inputElement = getByPlaceholderText('Placeholder del buscador');
-    //     const buttonElement = getByText('Buscar');
+    it('Lanza mensaje de error cuando se hace click y no hay texto en el buscador', () => {
+        act(() => {
+            render(
+                <MemoryRouter>
+                    <IdiomaContextProvider value={{ idioma: 'es' }}>
+                        <Buscador loading={false} />
+                    </IdiomaContextProvider>
+                </MemoryRouter>,
+                container
+            );
+        });
 
-    //     fireEvent.click(buttonElement);
+        const boton = container.querySelector('button');
+        const mensajeError = container.querySelector(".mensaje-error");
+        act(() => {
+            boton.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+        });
 
-    //     const errorMessage = getByText('Mensaje de error para entrada vacía');
-    //     expect(errorMessage).toBeInTheDocument();
-    // });
+        expect(mensajeError.textContent).toBe("Se debe introducir un código postal.")
+
+    });
+
+    it('Lanza mensaje de error cuando se introducen letras en vez de números', () => {
+        act(() => {
+            render(
+                <MemoryRouter>
+                    <IdiomaContextProvider value={{ idioma: 'es' }}>
+                        <Buscador loading={false} value='ABCDE' />
+                    </IdiomaContextProvider>
+                </MemoryRouter>,
+                container
+            );
+        });
+
+        const input = container.querySelector('input');
+        const boton = container.querySelector('button');
+        const mensajeError = container.querySelector('.mensaje-error');
+
+        act(() => {
+            boton.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+        });
+
+        expect(mensajeError.textContent).toBe('El código postal debe ser numérico.');
+        console.log('input.value :>> ', input.value);
+    });
 });

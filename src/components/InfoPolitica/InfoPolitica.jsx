@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import './InfoPolitica.css';
 import banderas from '../../config/banderas.json';
-import { InfoHistorialContext } from '../../context/InfoHistorialContext';
 import { IdiomaContext } from '../../context/IdiomaContext';
 import idiomas from '../../config/idiomas.json';
 
-export const InfoPolitica = () => {
-    const { infoPolitica } = useContext(InfoHistorialContext);
+export const InfoPolitica = (props) => {
+    const { infoPolitica } = props;
+    console.log('props :>> ', props);
     let abbreviation = infoPolitica.places[0]["state abbreviation"];
     const { idioma } = useContext(IdiomaContext);
 

@@ -10,19 +10,25 @@ export const useFetchGen = (url) => {
             try {
                 const response = await fetch(url);
                 const result = await response.json();
-                if (Object.keys(result) == 0 || result.length == 0 || result == undefined) setError(true)
-                else {
-                    setData(result)
-                    setError(false);
+                if (response?.ok) {
+                    if (Object.keys(result) == 0 || result.length == 0 || result == undefined) setError(true)
+                    else {
+                        setData(result)
+                        setError(false);
+                    }
+                } else {
+                    console.log('response.status :>> ', response.status);
+                    setError(true);
                 }
             } catch (err) {
                 console.log('object :>> ', err);
                 setError(true)
             }
+            setLoading(false)
         })()
 
     }, [url])
 
 
-    return { loading, setLoading, error, setError, data }
+    return { loading, error, data }
 }

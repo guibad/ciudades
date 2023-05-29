@@ -14,7 +14,7 @@ import idiomas from '../../config/idiomas.json';
 
 export const BuscarPage = () => {
   const { cp } = useParams();
-  const { loading, error } = useFetchPolitica(cp);
+  const { infoPolitica, loading1: loading, error } = useFetchPolitica(cp);
   const { idioma } = useContext(IdiomaContext);
 
   return (
@@ -29,13 +29,13 @@ export const BuscarPage = () => {
           ) : (
             <>
               <Recuadro texto={idiomas[idioma].BuscarPage.InfoPolitica.titulo} >
-                <InfoPolitica />
+                <InfoPolitica infoPolitica={infoPolitica} />
               </Recuadro>
               <Recuadro texto={idiomas[idioma].BuscarPage.InfoClima.titulo} altura="365px">
-                <InfoClima />
+                <InfoClima infoPolitica={infoPolitica} />
               </Recuadro>
-              <Recuadro texto={idiomas[idioma].BuscarPage.InfoGeo.titulo}>
-                <InfoGeo />
+              <Recuadro texto={idiomas[idioma].BuscarPage.InfoGeo.titulo} >
+                <InfoGeo infoPolitica={infoPolitica} />
               </Recuadro>
             </>
           )

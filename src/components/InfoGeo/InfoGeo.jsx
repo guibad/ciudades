@@ -6,7 +6,7 @@ import { IdiomaContext } from '../../context/IdiomaContext';
 import idiomas from '../../config/idiomas.json';
 
 export const InfoGeo = (props) => {
-    const { infoPolitica } = useContext(InfoHistorialContext);
+    const { infoPolitica } = props;
     let abbreviation = infoPolitica.places[0]["state abbreviation"];
     let latitud = infoPolitica.places[0].latitude;
     let longitud = infoPolitica.places[0].longitude;

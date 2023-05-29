@@ -12,13 +12,13 @@ export const useFetchPolitica = (cp) => {
             if (error) {
                 setLoading1(false)
                 return
-            } else if (data && data.places) { // Verificar si data y data.places son definidos
+            } else if (data && data.places && !error) { // Verificar si data y data.places son definidos
                 if (cp.slice(0, 2) === "35") {
                     data.places[0].latitude = 28.1;
                     data.places[0].longitude = -15.5;
                 }
                 setInfoPolitica(data);
-                setHistorial([{ "cp": cp, "ciudad": data.places[0]["place name"], "comunidad": data.places[0].state }, ...historial]);
+                setHistorial([{ "cp": data["post code"], "ciudad": data.places[0]["place name"], "comunidad": data.places[0].state }, ...historial]);
                 setLoading1(false);
             }
         })();

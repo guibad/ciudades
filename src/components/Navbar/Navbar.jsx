@@ -18,8 +18,8 @@ export const Navbar = () => {
             <div className="links-container">
                 <SelectorIdioma />
                 <div className='links'>
-                    <NavLink exact="true" to="/" className={(link) => link.isActive || location.pathname.includes("buscar") ? "link_activo" : "link"}>{idiomas[idioma].navbar.buscar}</NavLink>
-                    <NavLink to="/historial" className={(link) => link.isActive ? "link_activo" : "link"}>{idiomas[idioma].navbar.historial}</NavLink>
+                    <NavLink id="linkBuscar" exact="true" to="/" className={(link) => link.isActive || location.pathname.includes("buscar") ? "link_activo" : "link"}>{idiomas[idioma].navbar.buscar}</NavLink>
+                    <NavLink id="linkHistorial" to="/historial" className={(link) => link.isActive ? "link_activo" : "link"}>{idiomas[idioma].navbar.historial}</NavLink>
                 </div>
             </div>
         </nav>

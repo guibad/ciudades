@@ -62,7 +62,6 @@ describe('Navbar', () => {
     });
 
     it('Los enlaces cambian de clase segun la ruta en la que se encuentren', () => {
-        // Cambiamos de ubicación para comprobar que las clases de los links cambian
         act(() => {
             render(
                 <MemoryRouter initialEntries={['/historial']}>
@@ -106,63 +105,12 @@ describe('Navbar', () => {
             );
         });
 
-        // Busca los enlaces
 
-        setTimeout(() => {
-            act(() => {
-                const linkHistorial = container.querySelector('#linkHistorial');
-                linkHistorial.dispatchEvent(new MouseEvent('click', { bubbles: true }));
-            });
+        act(() => {
+            const linkHistorial = container.querySelector('#linkHistorial');
+            linkHistorial.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+        });
 
-            expect(history.location.pathname).toBe('/historial');
-        }, 1000);
+        expect(history.location.pathname).toBe('/historial');
     });
 });
-
-// test('renderiza los enlaces correctamente', () => {
-//     const container = document.createElement('div');
-
-//     render(
-//         <MemoryRouter>
-//             <IdiomaContextProvider>
-//                 <Navbar />
-//             </IdiomaContextProvider>
-//         </MemoryRouter>,
-//         container
-//     );
-
-//     // Verifica que los enlaces estén presentes y tengan los estilos correctos
-//     const linkBuscar = container.querySelector('a[href="/"]');
-//     expect(linkBuscar).toBeInTheDocument();
-//     expect(linkBuscar).toHaveClass('link');
-
-//     const linkHistorial = container.querySelector('a[href="/historial"]');
-//     expect(linkHistorial).toBeInTheDocument();
-//     expect(linkHistorial).toHaveClass('link');
-
-//     // Simula un cambio de ubicación para activar el enlace "Buscar"
-//     render(
-//         <MemoryRouter initialEntries={['/buscar']}>
-//             <IdiomaContextProvider>
-//                 <Navbar />
-//             </IdiomaContextProvider>
-//         </MemoryRouter>,
-//         container
-//     );
-
-//     // Verifica que el enlace "Buscar" tenga la clase "link_activo" cuando está activo
-//     expect(linkBuscar).toHaveClass('link_activo');
-
-//     // Simula un cambio de ubicación para activar el enlace "Historial"
-//     render(
-//         <MemoryRouter initialEntries={['/historial']}>
-//             <IdiomaContextProvider>
-//                 <Navbar />
-//             </IdiomaContextProvider>
-//         </MemoryRouter>,
-//         container
-//     );
-
-//     // Verifica que el enlace "Historial" tenga la clase "link_activo" cuando está activo
-//     expect(linkHistorial).toHaveClass('link_activo');
-// });

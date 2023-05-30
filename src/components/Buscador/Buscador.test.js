@@ -76,15 +76,13 @@ describe('Buscador', () => {
         const mensajeError = container.querySelector('.mensaje-error');
         const input = container.querySelector('input');
 
-        setTimeout(() => {
-            act(() => {
-                Simulate.change(input, { target: { value: 'ABCDE' } });
-                Simulate.keyDown(input, { key: 'Enter' });
-            });
+        act(() => {
+            Simulate.change(input, { target: { value: 'ABCDE' } });
+            Simulate.keyDown(input, { key: 'Enter' });
+        });
 
-            console.log('input.value :>> ', input.value);
-            expect(mensajeError.textContent).toBe('El código postal debe ser numérico.');
-        }, 1000);
+        console.log('input.value :>> ', input.value);
+        expect(mensajeError.textContent).toBe('El código postal debe ser numérico.');
     });
 
     it('Lanza mensaje de error cuando se introducen menos o más de 5 caracteres', () => {
@@ -102,16 +100,30 @@ describe('Buscador', () => {
         const mensajeError = container.querySelector('.mensaje-error');
         const input = container.querySelector('input');
 
-        setTimeout(() => {
-            act(() => {
-                Simulate.change(input, { target: { value: '123456' } });
-                Simulate.keyDown(input, { key: 'Enter' });
-            });
+        act(() => {
+            Simulate.change(input, { target: { value: '123456' } });
+            Simulate.keyDown(input, { key: 'Enter' });
+        });
 
-            console.log('input.value :>> ', input.value);
-            expect(mensajeError.textContent).toBe('El código postal debe tener 5 dígitos.');
-        }, 1000);
+        console.log('input.value :>> ', input.value);
+        expect(mensajeError.textContent).toBe('El código postal debe tener 5 dígitos.');
     });
 
+    it('Boton de búsqueda desaparece si la búsqueda se esta ejecutando', () => {
+        act(() => {
+            render(
+                <MemoryRouter>
+                    <IdiomaContextProvider value={{ idioma: 'es' }}>
+                        <Buscador loading={true} />
+                    </IdiomaContextProvider>
+                </MemoryRouter>,
+                container
+            );
+        });
+
+        const boton = container.querySelector('button');
+        expect(boton.style.opacity).toBe("0");
+        expect(boton.style.pointerEvents).toBe("none");
+    });
 
 });

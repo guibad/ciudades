@@ -22,3 +22,8 @@
 .texto p {
     font-size: 18px;
 }
+
+.no-info {
+    width: 100%;
+    text-align: center;
+}

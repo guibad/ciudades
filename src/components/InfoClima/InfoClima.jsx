@@ -13,7 +13,7 @@ export const InfoClima = (props) => {
     }
 
     if (error) {
-        return <div>Error recuperando datos</div>
+        return <div className='error-clima'>Error recuperando datos</div>
     } else if (!loading1) {
         let temperaturas = infoClima.hourly.temperature_2m;
         let horas = infoClima.hourly.time;

@@ -18,7 +18,7 @@ describe('InfoPolitica', () => {
         container.remove();
     });
 
-    it('debería renderizar correctamente la información política', () => {
+    it('Componente se renderiza correctamente', () => {
         const infoPolitica = {
             places: [
                 {
@@ -37,20 +37,34 @@ describe('InfoPolitica', () => {
                 , container);
         });
 
-        expect(container.querySelector('.politica-container')).not.toBeNull();
+        expect(container.querySelector('.politica-container')).not.toBe(null);
 
         const imagen = container.querySelector('.imagen');
         expect(imagen).not.toBeNull();
         expect(imagen.getAttribute('src')).toBe('/assets/img/flags/bcat.gif');
         expect(imagen.getAttribute('alt')).toBe('Bandera Catalunya');
 
-        const texto = container.querySelector('.texto');
         const ciudad = container.querySelector('.ciudad-texto');
         const comunidad = container.querySelector('.comunidad-texto');
-        expect(texto).not.toBeNull();
-        expect(ciudad).not.toBeNull();
-        expect(comunidad).not.toBeNull();
+        expect(container.querySelector('.texto')).not.toBe(null);
+        expect(ciudad).not.toBe(null);
+        expect(comunidad).not.toBe(null);
+        expect(container.querySelector('.no-info')).toBe(null);
         expect(ciudad.textContent).toBe('Ciudad: Barcelona');
         expect(comunidad.textContent).toBe('Comunidad: Catalunya');
+    });
+
+    it('Si el array infoPolitica está undefined, el recuadro no muestra nada', () => {
+        const infoPolitica = undefined;
+
+        act(() => {
+            render(
+                <IdiomaContextProvider value={{ idioma: 'es' }}>
+                    <InfoPolitica infoPolitica={infoPolitica} />
+                </IdiomaContextProvider>
+                , container);
+        });
+
+        expect(container.querySelector('.no-info')).not.toBe(null);
     });
 });

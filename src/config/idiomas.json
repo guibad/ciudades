@@ -10,7 +10,7 @@
             "boton": "Buscar",
             "errorCPVacio": "Se debe introducir un código postal.",
             "errorCP5Digitos": "El código postal debe tener 5 dígitos.",
-            "errorNumerico": "El codigo postal debe ser númerico."
+            "errorNumerico": "El código postal debe ser numérico."
         },
         "BuscarPage": {
             "InfoPolitica": {

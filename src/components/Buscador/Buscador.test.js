@@ -78,6 +78,8 @@ describe('Buscador', () => {
 
         act(() => {
             Simulate.change(input, { target: { value: 'ABCDE' } });
+        });
+        act(() => {
             Simulate.keyDown(input, { key: 'Enter' });
         });
 
@@ -102,6 +104,8 @@ describe('Buscador', () => {
 
         act(() => {
             Simulate.change(input, { target: { value: '123456' } });
+        });
+        act(() => {
             Simulate.keyDown(input, { key: 'Enter' });
         });
 

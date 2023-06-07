@@ -17,7 +17,6 @@ export const useFetch = (url) => {
                         setError(false);
                     }
                 } else {
-                    console.log('response.status :>> ', response.status);
                     setError(true);
                 }
             } catch (err) {

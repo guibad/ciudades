@@ -7,7 +7,6 @@ export const useFetchClima = (latitud, longitud) => {
     const [loading1, setLoading1] = useState(true)
 
     useEffect(() => {
-        console.log('infoClima :>> ', data);
         if (error) {
             setLoading1(false)
             return

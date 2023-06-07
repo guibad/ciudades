@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from 'react'
 import { InfoHistorialContext } from '../context/InfoHistorialContext';
-import { useFetchGen } from './useFetchGen';
+import { useFetch } from './useFetch';
 
 export const useFetchPolitica = (cp) => {
     const { infoPolitica, setInfoPolitica, historial, setHistorial } = useContext(InfoHistorialContext);
-    const { loading, error, data } = useFetchGen(`https://api.zippopotam.us/es/${cp}`);
+    const { loading, error, data } = useFetch(`https://api.zippopotam.us/es/${cp}`);
     const [loading1, setLoading1] = useState(true)
 
     useEffect(() => {

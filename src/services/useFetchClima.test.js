@@ -52,12 +52,12 @@ describe('useFetchClima', () => {
 
         expect(customHook.loading1).toBe(false);
         expect(customHook.error).toBe(false);
-        expect(customHook.infoClima).toEqual(mockData);
         expect(useFetch).toHaveBeenCalledWith(`https://api.open-meteo.com/v1/forecast?latitude=${mockLatitud}&longitude=${mockLongitud}&hourly=temperature_2m`);
+        expect(customHook.infoClima).toEqual(mockData);
         expect(container.querySelector("#TestComponent_Data").textContent).toBe(JSON.stringify(customHook.infoClima));
     });
 
-    it('Deberia manejar el error correctamente', async () => {
+    it('Maneja el error correctamente', async () => {
         const mockLatitud = 41.387;
         const mockLongitud = 2.1701;
 

@@ -5,7 +5,6 @@ import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { IdiomaContextProvider } from '../../context/IdiomaContext';
-import { toHaveClass } from '@testing-library/jest-dom'
 import { Navbar } from './Navbar';
 
 jest.mock("react-router-dom", () => {
@@ -68,10 +67,10 @@ describe('Navbar', () => {
         })
 
         const linkBuscar = container.querySelector('#linkBuscar');
-        expect(linkBuscar).toHaveClass("link_activo");
+        expect(linkBuscar.classList.contains("link_activo")).toBe(true);
 
         const linkHistorial = container.querySelector('#linkHistorial');
-        expect(linkHistorial).toHaveClass("link");
+        expect(linkHistorial.classList.contains("link")).toBe(true);
     });
 
     it('Los enlaces cambian de clase segun la ruta en la que se encuentren', () => {
@@ -96,10 +95,10 @@ describe('Navbar', () => {
         })
 
         const linkBuscar = container.querySelector('#linkBuscar');
-        expect(linkBuscar).toHaveClass("link");
+        expect(linkBuscar.classList.contains("link")).toBe(true);
 
         const linkHistorial = container.querySelector('#linkHistorial');
-        expect(linkHistorial).toHaveClass("link_activo");
+        expect(linkHistorial.classList.contains("link_activo")).toBe(true);
 
         path = "buscar";
         act(() => {
@@ -111,8 +110,8 @@ describe('Navbar', () => {
             );
         })
 
-        expect(linkBuscar).toHaveClass("link_activo");
-        expect(linkHistorial).toHaveClass("link");
+        expect(linkBuscar.classList.contains("link_activo")).toBe(true);
+        expect(linkHistorial.classList.contains("link")).toBe(true);
     });
 
     it('La ruta cambia al hacer click sobre los links', () => {

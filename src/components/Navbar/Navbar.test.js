@@ -77,6 +77,7 @@ describe('Navbar', () => {
         let path = "historial";
 
         NavLink.mockImplementation(() => {
+
             return (
                 <>
                     <div id="linkBuscar" className={path.includes("buscar") ? "link_activo" : "link"}>Buscar</div>

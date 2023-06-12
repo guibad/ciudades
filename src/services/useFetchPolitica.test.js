@@ -87,6 +87,64 @@ describe('useFetchPolitica', () => {
         expect(container.querySelector("#TestComponent_Data").textContent).toBe(JSON.stringify(hookResult.infoPolitica));
     });
 
+    it('Se añade la latitud y longitud manualmente cuando se hace fetch a un CP de Canarias', async () => {
+        const mockCp = '35001';
+        const mockData = {
+            "post code": "35001",
+            "country": "Spain",
+            "country abbreviation": "ES",
+            "places": [
+                {
+                    "place name": "Las Palmas De Gran Canaria",
+                    "longitude": "28.1",
+                    "state": "Canarias",
+                    "state abbreviation": "CN",
+                    "latitude": ""
+                }
+            ]
+        }
+
+        const mockContextValue = {
+            infoPolitica: {},
+            setInfoPolitica: jest.fn(),
+            historial: [],
+            setHistorial: jest.fn(),
+        };
+
+        useFetch.mockReturnValue({
+            loading: false,
+            error: false,
+            data: mockData,
+        });
+
+        let hookResult;
+
+        const TestComponent = () => {
+            hookResult = useFetchPolitica(mockCp);
+            return (
+                <div>
+                    <div id="TestComponent_Data">{JSON.stringify(hookResult.infoPolitica)}</div>
+                </div>
+            );
+        };
+
+        await act(async () => {
+            render(
+                <InfoHistorialContext.Provider value={mockContextValue}>
+                    <TestComponent />
+                </InfoHistorialContext.Provider>,
+                container
+            );
+        });
+
+        expect(hookResult.loading1).toBe(false);
+        expect(hookResult.error).toBe(false);
+        expect(useFetch).toHaveBeenCalledWith(`https://api.zippopotam.us/es/${mockCp}`);
+        expect(container.querySelector("#TestComponent_Data").textContent).toBe(JSON.stringify(hookResult.infoPolitica));
+        expect(mockContextValue.infoPolitica.latitude).not.toBe(null);
+        expect(mockContextValue.infoPolitica.longitude).not.toBe(null);
+    });
+
     it('Maneja el error correctamente', async () => {
         const mockCp = '08020';
 

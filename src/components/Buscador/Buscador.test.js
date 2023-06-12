@@ -130,4 +130,29 @@ describe('Buscador', () => {
         expect(boton.style.pointerEvents).toBe("none");
     });
 
+    it('No se muestra mensaje de error cuando se ejecuta la búsqueda', () => {
+        act(() => {
+            render(
+                <MemoryRouter>
+                    <IdiomaContextProvider value={{ idioma: 'es' }}>
+                        <Buscador loading={false} />
+                    </IdiomaContextProvider>
+                </MemoryRouter>,
+                container
+            );
+        });
+
+        const mensajeError = container.querySelector('.mensaje-error');
+        const input = container.querySelector('input');
+
+        act(() => {
+            Simulate.change(input, { target: { value: '08020' } });
+        });
+        act(() => {
+            Simulate.keyDown(input, { key: 'Enter' });
+        });
+
+        expect(mensajeError.textContent).toBe('');
+    });
+
 });

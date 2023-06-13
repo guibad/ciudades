@@ -1,10 +1,10 @@
 import React from 'react';
 import { Buscador } from '../../components/Buscador/Buscador';
 
-export const InicioPage = () => {
+const InicioPage = () => {
   return (
-    <div>
-      <Buscador />
-    </div>
+    <Buscador />
   )
 }
+
+export default InicioPage;

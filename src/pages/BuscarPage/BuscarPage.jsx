@@ -12,7 +12,7 @@ import './BuscarPage.css';
 import { IdiomaContext } from '../../context/IdiomaContext';
 import idiomas from '../../config/idiomas.json';
 
-export const BuscarPage = () => {
+const BuscarPage = () => {
   const { cp } = useParams();
   const { infoPolitica, loading1: loading, error } = useFetchPolitica(cp);
   const { idioma } = useContext(IdiomaContext);
@@ -44,3 +44,5 @@ export const BuscarPage = () => {
     </div>
   )
 }
+
+export default BuscarPage;

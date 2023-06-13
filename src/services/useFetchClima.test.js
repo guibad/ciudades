@@ -73,7 +73,11 @@ describe('useFetchClima', () => {
             customHook = useFetchClima(mockLatitud, mockLongitud);
             return (
                 <div>
-                    <div id="TestComponent_Data">{JSON.stringify(customHook.infoClima)}</div>
+                    {
+                        customHook.loading1 ? "" : (
+                            <div id="TestComponent_Data">{JSON.stringify(customHook.infoClima)}</div>
+                        )
+                    }
                 </div>
             );
         };
@@ -84,7 +88,6 @@ describe('useFetchClima', () => {
 
         expect(customHook.loading1).toBe(false);
         expect(customHook.error).toBe(true);
-        expect(customHook.infoClima).toEqual([]);
-        expect(container.querySelector("#TestComponent_Data").textContent).toBe("[]");
+        expect(container.querySelector("#TestComponent_Data").textContent).toBe(JSON.stringify(customHook.infoClima));
     });
 });

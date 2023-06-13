@@ -6,7 +6,7 @@ import { IdiomaContext } from '../../context/IdiomaContext';
 import idiomas from '../../config/idiomas.json';
 import './HistorialPage.css';
 
-export const HistorialPage = () => {
+const HistorialPage = () => {
   const { historial, setHistorial } = useContext(InfoHistorialContext);
   const { idioma } = useContext(IdiomaContext);
   const navigate = useNavigate();
@@ -44,6 +44,7 @@ export const HistorialPage = () => {
 
       </div>
     </>
-
   )
 }
+
+export default HistorialPage;

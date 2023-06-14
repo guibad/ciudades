@@ -12,38 +12,36 @@ const HistorialPage = () => {
   const navigate = useNavigate();
 
   const borrarHistorial = () => {
+    console.log("borrando historial");
     setHistorial([]);
   }
 
   return (
-    <>
-      <div className='container-historial'>
-        {
-          historial.map((item, index) => {
-            return (
-              <div className='busqueda-container' onClick={() => navigate(`/buscar/${item.cp}`)} key={index}>
-                <div className="busqueda">
-                  <div className='codigo-postal-container'>
-                    <p className='codigo-postal'>{item.cp}</p>
-                  </div>
-                  <div className='info-container'>
-                    <p className='info'>{item.ciudad} ({item.comunidad})</p>
-                  </div>
+    <div className='container-historial'>
+      {
+        historial.map((item, index) => {
+          return (
+            <div className='busqueda-container' onClick={() => navigate(`/buscar/${item.cp}`)} key={index}>
+              <div className="busqueda">
+                <div className='codigo-postal-container'>
+                  <p className='codigo-postal'>{item.cp}</p>
+                </div>
+                <div className='info-container'>
+                  <p className='info'>{item.ciudad} ({item.comunidad})</p>
                 </div>
               </div>
-            );
-          })
+            </div>
+          );
+        })
+      }
+      <div className='boton-container'>
+        {
+          historial.length !== 0 ? (
+            <Boton onClick={borrarHistorial} texto={idiomas[idioma].HistorialPage.boton} height="43px" />
+          ) : <h4 className='texto-no-historial'>{idiomas[idioma].HistorialPage.texto}</h4>
         }
-        <div className='boton-container'>
-          {
-            historial.length !== 0 ? (
-              <Boton onClick={borrarHistorial} texto={idiomas[idioma].HistorialPage.boton} height="43px" />
-            ) : <h4>{idiomas[idioma].HistorialPage.texto}</h4>
-          }
-        </div>
-
       </div>
-    </>
+    </div>
   )
 }
 

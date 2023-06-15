@@ -1,26 +1,26 @@
-/* eslint-disable testing-library/no-unnecessary-act */
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { render, unmountComponentAtNode } from "react-dom";
-import { act } from "react-dom/test-utils";
-import { useFetch } from "./useFetch";
+import { act } from 'react-dom/test-utils';
+import { useFetch } from './useFetch';
 
-global.fetch = jest.fn();
+describe('useFetch', () => {
+    let container = null;
 
-let container = null;
-beforeEach(() => {
-    container = document.createElement("div");
-    document.body.appendChild(container);
-});
+    beforeEach(() => {
+        global.fetch = jest.fn();
+        container = document.createElement("div");
+        document.body.appendChild(container);
+    });
 
-afterEach(() => {
-    unmountComponentAtNode(container);
-    container.remove();
-    container = null;
-});
+    afterEach(() => {
+        unmountComponentAtNode(container);
+        container.remove();
+        container = null;
+        jest.resetAllMocks();
+    });
 
-describe("Test for Listado", () => {
-    it("Montaje de componente correcto", async () => {
-        const mockDataFetch = {
+    it('Montaje de componente correcto', async () => {
+        const mockData = {
             "post code": "08020",
             "country": "Spain",
             "country abbreviation": "ES",
@@ -34,32 +34,66 @@ describe("Test for Listado", () => {
                 }
             ]
         };
-        const TestComponent = () => {
-            const { call, data, loading, error } = useFetch();
 
-            useEffect(() => {
-                call();
-            }, []);
-
-            return <div id="TestComponent"></div>;
+        const mockResponse = {
+            ok: true,
+            status: 200,
+            json: jest.fn().mockResolvedValue(mockData),
         };
 
-        global.fetch.mockImplementation(() => {
-            return Promise.resolve({
-                json: () => Promise.resolve({}),
+        global.fetch.mockResolvedValueOnce(mockResponse);
+
+        let result = {};
+
+        await act(async () => {
+            await new Promise((resolve) => {
+                const Component = () => {
+                    result = useFetch(null);
+                    resolve();
+                    return <div id="TestComponent"></div>;
+                };
+
+                render(<Component />, container);
             });
         });
 
-
         await act(async () => {
-            render(<TestComponent />, container);
+            await result.call('https://api.zippopotam.us/es/08020');
         });
 
+        expect(result.loading).toBe(false);
+        expect(result.error).toBe(false);
+        expect(result.data).toEqual(mockData);
     });
 
-    /*
-      expect(container.querySelector("#TestComponent_Data").textContent).toBe(
-        "TestData"
-      );
-      */
+    it('Maneja error correctamente', async () => {
+        const mockResponse = {
+            ok: false,
+            status: 404,
+        };
+        global.fetch.mockResolvedValueOnce(mockResponse);
+
+        let result = {};
+
+        await act(async () => {
+            await new Promise((resolve) => {
+                const Component = () => {
+                    result = useFetch(null);
+                    resolve();
+                    return <div id="TestComponent">{result.data}</div>;
+                };
+
+                render(<Component />, container);
+            });
+        });
+
+        await act(async () => {
+            await result.call('https://api.zippopotam.us/es/08020');
+        });
+
+        expect(result.loading).toBe(false);
+        expect(result.error).toBe(true);
+        expect(result.data).toBe(null);
+        expect(container.querySelector('#TestComponent').textContent).toBe("")
+    });
 });

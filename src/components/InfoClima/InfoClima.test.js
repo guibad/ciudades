@@ -21,7 +21,7 @@ describe('InfoClima', () => {
                     time: ['2023-05-30T12:00:00', '2023-05-30T13:00:00', '2023-05-30T14:00:00', '2023-05-30T15:00:00'],
                 },
             },
-            loading1: false,
+            loadingClima: false,
             error: null,
         });
     });
@@ -51,7 +51,7 @@ describe('InfoClima', () => {
     it('Muestra mensaje de error cuando error es true', () => {
         useFetchClima.mockReturnValue({
             infoClima: null,
-            loading1: false,
+            loadingClima: false,
             error: true,
         });
 
@@ -70,7 +70,7 @@ describe('InfoClima', () => {
     it('Muestra mensaje de carga cuando loading es true', () => {
         useFetchClima.mockReturnValue({
             infoClima: null,
-            loading1: true,
+            loadingClima: true,
             error: null,
         });
 

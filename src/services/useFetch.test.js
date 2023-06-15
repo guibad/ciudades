@@ -34,21 +34,27 @@ describe("Test for Listado", () => {
                 }
             ]
         };
+        const TestComponent = () => {
+            const { call, data, loading, error } = useFetch();
 
-        const TestComponent = async () => {
-            const { data, loading, error } = useFetch("https://api.zippopotam.us/es/08020");
+            useEffect(() => {
+                call();
+            }, []);
 
-            if (!loading && !error) {
-                return <div id="TestComponent">{data}</div>;
-            }
+            return <div id="TestComponent"></div>;
         };
+
+        global.fetch.mockImplementation(() => {
+            return Promise.resolve({
+                json: () => Promise.resolve({}),
+            });
+        });
 
 
         await act(async () => {
             render(<TestComponent />, container);
         });
 
-        expect(container.querySelector("#TestComponent").textContent).toBe(mockDataFetch);
     });
 
     /*

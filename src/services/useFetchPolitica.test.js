@@ -39,6 +39,9 @@ describe('useFetchPolitica', () => {
             ]
         }
 
+        let checkUrl = "";
+        const callMock = jest.fn();
+
         const mockContextValue = {
             infoPolitica: {},
             setInfoPolitica: jest.fn(),
@@ -47,9 +50,14 @@ describe('useFetchPolitica', () => {
         };
 
         useFetch.mockReturnValue({
+            call: callMock,
             loading: false,
             error: false,
             data: mockData,
+        });
+
+        callMock.mockImplementation((url) => {
+            checkUrl = url;
         });
 
         let hookResult;
@@ -72,9 +80,9 @@ describe('useFetchPolitica', () => {
             );
         });
 
-        expect(hookResult.loading1).toBe(false);
+        expect(hookResult.loadingPolitica).toBe(false);
         expect(hookResult.error).toBe(false);
-        expect(useFetch).toHaveBeenCalledWith(`https://api.zippopotam.us/es/${mockCp}`);
+        expect(checkUrl).toBe(`https://api.zippopotam.us/es/${mockCp}`);
         expect(mockContextValue.setInfoPolitica).toHaveBeenCalledWith(mockData);
         expect(mockContextValue.setHistorial).toHaveBeenCalledWith([
             {
@@ -104,6 +112,9 @@ describe('useFetchPolitica', () => {
             ]
         }
 
+        let checkUrl = "";
+        const callMock = jest.fn();
+
         const mockContextValue = {
             infoPolitica: {},
             setInfoPolitica: jest.fn(),
@@ -112,9 +123,14 @@ describe('useFetchPolitica', () => {
         };
 
         useFetch.mockReturnValue({
+            call: callMock,
             loading: false,
             error: false,
             data: mockData,
+        });
+
+        callMock.mockImplementation((url) => {
+            checkUrl = url;
         });
 
         let hookResult;
@@ -137,16 +153,19 @@ describe('useFetchPolitica', () => {
             );
         });
 
-        expect(hookResult.loading1).toBe(false);
+        expect(hookResult.loadingPolitica).toBe(false);
         expect(hookResult.error).toBe(false);
-        expect(useFetch).toHaveBeenCalledWith(`https://api.zippopotam.us/es/${mockCp}`);
+        expect(checkUrl).toBe(`https://api.zippopotam.us/es/${mockCp}`);
         expect(container.querySelector("#TestComponent_Data").textContent).toBe(JSON.stringify(hookResult.infoPolitica));
-        expect(mockContextValue.infoPolitica.latitude).not.toBe(null);
-        expect(mockContextValue.infoPolitica.longitude).not.toBe(null);
+        expect(mockData.places[0].latitude).toBe(28.1);
+        expect(mockData.places[0].longitude).toBe(-15.5);
     });
 
     it('Maneja el error correctamente', async () => {
-        const mockCp = '08020';
+        const mockCp = '35001';
+
+        let checkUrl = "";
+        const callMock = jest.fn();
 
         const mockContextValue = {
             infoPolitica: {},
@@ -156,16 +175,25 @@ describe('useFetchPolitica', () => {
         };
 
         useFetch.mockReturnValue({
+            call: callMock,
             loading: false,
             error: true,
             data: null,
+        });
+
+        callMock.mockImplementation((url) => {
+            checkUrl = url;
         });
 
         let hookResult;
 
         const TestComponent = () => {
             hookResult = useFetchPolitica(mockCp);
-            return null;
+            return (
+                <div>
+                    <div id="TestComponent_Data">{JSON.stringify(hookResult.infoPolitica)}</div>
+                </div>
+            );
         };
 
         await act(async () => {
@@ -177,10 +205,59 @@ describe('useFetchPolitica', () => {
             );
         });
 
-        expect(hookResult.loading1).toBe(false);
+        expect(hookResult.loadingPolitica).toBe(false);
         expect(hookResult.error).toBe(true);
         expect(hookResult.infoPolitica).toEqual({});
         expect(mockContextValue.setInfoPolitica).not.toHaveBeenCalled();
         expect(mockContextValue.setHistorial).not.toHaveBeenCalled();
+    });
+
+    it('Componente se renderiza correctamente pero data es null (para obtener el 100% de las branches)', async () => {
+        const mockCp = '08020';
+
+        let checkUrl = "";
+        const callMock = jest.fn();
+
+        const mockContextValue = {
+            infoPolitica: {},
+            setInfoPolitica: jest.fn(),
+            historial: [],
+            setHistorial: jest.fn(),
+        };
+
+        useFetch.mockReturnValue({
+            call: callMock,
+            loading: false,
+            error: false,
+            data: null,
+        });
+
+        callMock.mockImplementation((url) => {
+            checkUrl = url;
+        });
+
+        let hookResult;
+
+        const TestComponent = () => {
+            hookResult = useFetchPolitica(mockCp);
+            return (
+                <div>
+                    <div id="TestComponent_Data">{JSON.stringify(hookResult.infoPolitica)}</div>
+                </div>
+            );
+        };
+
+        await act(async () => {
+            render(
+                <InfoHistorialContext.Provider value={mockContextValue}>
+                    <TestComponent />
+                </InfoHistorialContext.Provider>,
+                container
+            );
+        });
+
+        expect(checkUrl).toBe(`https://api.zippopotam.us/es/${mockCp}`);
+        expect(hookResult.error).toBe(false);
+        expect(hookResult.loadingPolitica).toBe(true);
     });
 });

@@ -63,7 +63,7 @@ describe('BuscarPage', () => {
 
         useFetchPolitica.mockReturnValue({
             infoPolitica: mockInfoPolitica,
-            loading1: true,
+            loadingPolitica: true,
             error: false,
         });
 
@@ -101,7 +101,7 @@ describe('BuscarPage', () => {
 
         useFetchPolitica.mockReturnValue({
             infoPolitica: mockInfoPolitica,
-            loading1: false,
+            loadingPolitica: false,
             error: true,
         });
 
@@ -167,7 +167,7 @@ describe('BuscarPage', () => {
 
         useFetchPolitica.mockReturnValue({
             infoPolitica: mockInfoPolitica,
-            loading1: false,
+            loadingPolitica: false,
             error: false,
         });
 

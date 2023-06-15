@@ -6,7 +6,7 @@ export const InfoClima = (props) => {
     const { infoPolitica } = props;
     let latitud = infoPolitica.places[0].latitude;
     let longitud = infoPolitica.places[0].longitude;
-    let { infoClima, loading1, error } = useFetchClima(latitud, longitud);
+    let { infoClima, loadingClima, error } = useFetchClima(latitud, longitud);
 
     function encontrarMaximo(array) {
         return Math.max(...array);
@@ -14,7 +14,7 @@ export const InfoClima = (props) => {
 
     if (error) {
         return <div className='error-clima'>Error recuperando datos</div>
-    } else if (!loading1) {
+    } else if (!loadingClima) {
         let temperaturas = infoClima.hourly.temperature_2m;
         let horas = infoClima.hourly.time;
         const maximaTemperatura = parseInt(encontrarMaximo(temperaturas));

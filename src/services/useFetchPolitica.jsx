@@ -4,25 +4,28 @@ import { useFetch } from './useFetch';
 
 export const useFetchPolitica = (cp) => {
     const { infoPolitica, setInfoPolitica, historial, setHistorial } = useContext(InfoHistorialContext);
-    const { loading, error, data } = useFetch(`https://api.zippopotam.us/es/${cp}`);
-    const [loading1, setLoading1] = useState(true)
+    const { call, data, loading, error } = useFetch();
+    const [loadingPolitica, setLoadingPolitica] = useState(true)
 
     useEffect(() => {
-        (() => {
-            if (error) {
-                setLoading1(false)
-                return
-            } else if (data && data.places && !error) { // Verificar si data y data.places son definidos
-                if (cp.slice(0, 2) === "35") {
-                    data.places[0].latitude = 28.1;
-                    data.places[0].longitude = -15.5;
-                }
-                setInfoPolitica(data);
-                setHistorial([{ "cp": data["post code"], "ciudad": data.places[0]["place name"], "comunidad": data.places[0].state }, ...historial]);
-                setLoading1(false);
-            }
-        })();
-    }, [cp, data, error]);
+        call(`https://api.zippopotam.us/es/${cp}`)
+    }, [cp]);
 
-    return { infoPolitica, loading1, error }
+    useEffect(() => {
+        if (error) {
+            setLoadingPolitica(false)
+            return
+        } else if (data && data.places && !error) { // Verificar si data y data.places son definidos
+            if (cp.slice(0, 2) === "35") {
+                data.places[0].latitude = 28.1;
+                data.places[0].longitude = -15.5;
+            }
+            setInfoPolitica(data);
+            setHistorial([{ "cp": data["post code"], "ciudad": data.places[0]["place name"], "comunidad": data.places[0].state }, ...historial]);
+            setLoadingPolitica(false);
+        }
+    }, [data, error])
+
+
+    return { infoPolitica, loadingPolitica, error }
 }

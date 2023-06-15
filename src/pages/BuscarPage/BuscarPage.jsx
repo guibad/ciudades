@@ -14,7 +14,7 @@ import idiomas from '../../config/idiomas.json';
 
 const BuscarPage = () => {
   const { cp } = useParams();
-  const { infoPolitica, loading1: loading, error } = useFetchPolitica(cp);
+  const { infoPolitica, loadingPolitica: loading, error } = useFetchPolitica(cp);
   const { idioma } = useContext(IdiomaContext);
 
   return (

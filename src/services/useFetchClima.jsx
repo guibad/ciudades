@@ -3,18 +3,22 @@ import { useFetch } from './useFetch';
 
 export const useFetchClima = (latitud, longitud) => {
     const [infoClima, setInfoClima] = useState([])
-    const { loading, error, data } = useFetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitud}&longitude=${longitud}&hourly=temperature_2m`);
-    const [loading1, setLoading1] = useState(true)
+    const { call, loading, error, data } = useFetch();
+    const [loadingClima, setLoadingClima] = useState(true)
+
+    useEffect(() => {
+        call(`https://api.open-meteo.com/v1/forecast?latitude=${latitud}&longitude=${longitud}&hourly=temperature_2m`)
+    }, [latitud, longitud]);
 
     useEffect(() => {
         if (error) {
-            setLoading1(false)
+            setLoadingClima(false)
             return
         } else if (data && data.hourly) {
             setInfoClima(data);
-            setLoading1(false)
+            setLoadingClima(false)
         }
     }, [latitud, longitud, data, error])
 
-    return { infoClima, loading1, error }
+    return { infoClima, loadingClima, error }
 }

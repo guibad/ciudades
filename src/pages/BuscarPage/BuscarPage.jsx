@@ -27,7 +27,7 @@ const BuscarPage = () => {
           error ? (
             <NoResultados />
           ) : (
-            <>
+            <div className='recuadros-container'>
               <Recuadro texto={idiomas[idioma].BuscarPage.InfoPolitica.titulo} >
                 <InfoPolitica infoPolitica={infoPolitica} />
               </Recuadro>
@@ -37,7 +37,7 @@ const BuscarPage = () => {
               <Recuadro texto={idiomas[idioma].BuscarPage.InfoGeo.titulo} >
                 <InfoGeo infoPolitica={infoPolitica} />
               </Recuadro>
-            </>
+            </div>
           )
         )
       }

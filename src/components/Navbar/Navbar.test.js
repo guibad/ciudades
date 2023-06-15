@@ -1,16 +1,14 @@
-/* eslint-disable testing-library/no-node-access */
 /* eslint-disable testing-library/no-unnecessary-act */
-import React from 'react';
-import { render, unmountComponentAtNode } from 'react-dom';
-import { act } from 'react-dom/test-utils';
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { IdiomaContextProvider } from '../../context/IdiomaContext';
-import { Navbar } from './Navbar';
+import React from "react";
+import { render, unmountComponentAtNode } from "react-dom";
+import { act } from "react-dom/test-utils";
+import { Navbar } from "./Navbar";
+import { NavLink, useLocation } from "react-router-dom";
+import { IdiomaContextProvider } from "../../context/IdiomaContext";
 
 jest.mock("react-router-dom", () => {
     return {
         NavLink: jest.fn(),
-        useNavigate: jest.fn(),
         useLocation: jest.fn(),
     };
 });
@@ -18,7 +16,7 @@ jest.mock("react-router-dom", () => {
 let container = null;
 
 beforeEach(() => {
-    container = document.createElement('div');
+    container = document.createElement("div");
     document.body.appendChild(container);
 });
 
@@ -28,33 +26,51 @@ afterEach(() => {
     container = null;
 });
 
-describe('Navbar', () => {
-    it('Renderiza el componente correctamente', () => {
-        act(() => {
-            render(
-                <IdiomaContextProvider value={{ idioma: 'es' }}>
-                    <Navbar />
-                </IdiomaContextProvider>,
-                container
-            );
-        })
+describe("Test for Navbar", () => {
+    it("Componente se renderiza correctamente", () => {
+        useLocation.mockImplementation(() => ({
+            pathname: "buscar"
+        }));
 
-        expect(container.querySelector('.navbar')).not.toBe(null);
-        expect(container.querySelector('.navbar-brand')).not.toBe(null);
-        expect(container.querySelector('.titulo')).not.toBe(null);
-        expect(container.querySelector('.links-container')).not.toBe(null);
+        NavLink.mockImplementation((props) => {
+            return <div id={props.id}>{props.children}</div>;
+        });
+
+        render(
+            <IdiomaContextProvider value={{ idioma: 'es' }}>
+                <Navbar />
+            </IdiomaContextProvider>,
+            container
+        );
+
+        expect(container.querySelector(".navbar")).not.toBe(null);
+        expect(container.querySelector("#linkBuscar")).not.toBe(null);
+        expect(container.querySelector("#linkHistorial")).not.toBe(null);
+
+        expect(container.querySelector("#linkBuscar").textContent).toBe("Buscar");
+        expect(container.querySelector("#linkHistorial").textContent).toBe("Historial");
     });
 
-    it('A los enlaces se les aplican las clases correctamente', () => {
-        let path = "buscar";
+    it("Las clases se aplican correctamente al link 'Buscar' cuando se está en la página correcta", () => {
+        useLocation.mockImplementation(() => ({
+            pathname: "buscar"
+        }));
 
-        NavLink.mockImplementation(() => {
-            return (
-                <>
-                    <div id="linkBuscar" className={path.includes("buscar") ? "link_activo" : "link"}>Buscar</div>
-                    <div id="linkHistorial" className={path.includes("historial") ? "link_activo" : "link"}>Historial</div>
-                </>
-            );
+        NavLink.mockImplementation((props) => {
+            let object = { isActive: false };
+            let resultClass = "";
+
+            if (typeof props.className === "function") {
+                resultClass = props.className(object);
+            } else {
+                resultClass = props.className;
+            }
+
+            if (props.id === "linkBuscar") {
+                return <div id="navlink-mock-buscar" className={resultClass}>{props.children}</div>
+            } else if (props.id === "linkHistorial") {
+                return <div id="navlink-mock-historial" className={resultClass}>{props.children}</div>
+            }
         });
 
         act(() => {
@@ -64,26 +80,35 @@ describe('Navbar', () => {
                 </IdiomaContextProvider>,
                 container
             );
-        })
+        });
 
-        const linkBuscar = container.querySelector('#linkBuscar');
-        expect(linkBuscar.classList.contains("link_activo")).toBe(true);
-
-        const linkHistorial = container.querySelector('#linkHistorial');
-        expect(linkHistorial.classList.contains("link")).toBe(true);
+        const navLinkMockBuscar = container.querySelector("#navlink-mock-buscar");
+        const navLinkMockHistorial = container.querySelector("#navlink-mock-historial");
+        expect(navLinkMockBuscar.classList.contains("link_activo")).toBe(true);
+        expect(navLinkMockHistorial.classList.contains("link")).toBe(true);
     });
 
-    it('Los enlaces cambian de clase segun la ruta en la que se encuentren', () => {
-        let path = "historial";
+    it("Las clases se aplican correctamente al link 'Historial' cuando el link está activo y se está en la página correcta", () => {
+        useLocation.mockImplementation(() => ({
+            pathname: "historial"
+        }));
 
-        NavLink.mockImplementation(() => {
+        NavLink.mockImplementation((props) => {
+            let resultClass = "";
 
-            return (
-                <>
-                    <div id="linkBuscar" className={path.includes("buscar") ? "link_activo" : "link"}>Buscar</div>
-                    <div id="linkHistorial" className={path.includes("historial") ? "link_activo" : "link"}>Historial</div>
-                </>
-            );
+            if (typeof props.className === "function") {
+                if (props.id === "linkBuscar") {
+                    resultClass = props.className({ isActive: false });
+                    return <div id="navlink-mock-buscar" className={resultClass}>{props.children}</div>
+
+                } else if (props.id === "linkHistorial") {
+                    resultClass = props.className({ isActive: true });
+                    return <div id="navlink-mock-historial" className={resultClass}>{props.children}</div>
+                }
+            } else {
+                resultClass = props.className;
+            }
+
         });
 
         act(() => {
@@ -93,73 +118,14 @@ describe('Navbar', () => {
                 </IdiomaContextProvider>,
                 container
             );
-        })
+        });
 
-        const linkBuscar = container.querySelector('#linkBuscar');
-        expect(linkBuscar.classList.contains("link")).toBe(true);
+        const navLinkMockHistorial = container.querySelector("#navlink-mock-historial");
+        const navLinkMockBuscar = container.querySelector("#navlink-mock-buscar");
 
-        const linkHistorial = container.querySelector('#linkHistorial');
-        expect(linkHistorial.classList.contains("link_activo")).toBe(true);
-
-        path = "buscar";
-        act(() => {
-            render(
-                <IdiomaContextProvider value={{ idioma: 'es' }}>
-                    <Navbar />
-                </IdiomaContextProvider>,
-                container
-            );
-        })
-
-        expect(linkBuscar.classList.contains("link_activo")).toBe(true);
-        expect(linkHistorial.classList.contains("link")).toBe(true);
+        expect(navLinkMockHistorial.classList.contains("link_activo")).toBe(true);
+        expect(navLinkMockBuscar.classList.contains("link")).toBe(true);
+        expect(navLinkMockBuscar.classList.contains("link_activo")).toBe(false);
     });
 
-    it('La ruta cambia al hacer click sobre los links', () => {
-        const navigateMock = jest.fn();
-        let checkPath = "/historial";
-
-        NavLink.mockImplementation(() => {
-            return (
-                <>
-                    <div id="linkBuscar" onClick={() => navigateMock('/')}>Buscar</div>
-                    <div id="linkHistorial" onClick={() => navigateMock('/historial')}>Historial</div>
-                </>
-            );
-        });
-
-        useNavigate.mockImplementation(() => {
-            return navigateMock;
-        });
-
-        navigateMock.mockImplementation((path) => {
-            checkPath = path;
-        });
-
-        act(() => {
-            render(
-                <IdiomaContextProvider value={{ idioma: 'es' }}>
-                    <Navbar />
-                </IdiomaContextProvider>,
-                container
-            );
-        });
-
-
-        act(() => {
-            const linkHistorial = container.querySelector('#linkHistorial');
-            linkHistorial.dispatchEvent(new MouseEvent('click', { bubbles: true }));
-        });
-
-        expect(checkPath).toBe("/historial");
-        expect(navigateMock).toHaveBeenCalled();
-
-        act(() => {
-            const linkBuscar = container.querySelector('#linkBuscar');
-            linkBuscar.dispatchEvent(new MouseEvent('click', { bubbles: true }));
-        });
-
-        expect(checkPath).toBe("/");
-        expect(navigateMock).toHaveBeenCalled();
-    });
 });
